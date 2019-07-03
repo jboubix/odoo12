@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Agrego campo Untaxed Amount en la vista de Lista por defecto de Account Invoice. -->
+    <record id="dnk_account_invoice_usd_amount_tree_view_1" model="ir.ui.view">
+        <field name="name">dnk_account_invoice_usd_amount_tree_view_1</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="dnk_amount_untaxed_usd" sum="- Total Untaxed USD" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Agrego campo Untaxed Amount en la vista de Pivote por defecto de Account Invoice. -->
+    <record id="dnk_account_invoice_usd_amount_pivot_view_1" model="ir.ui.view">
+        <field name="name">dnk_account_invoice_usd_amount_pivot_view_1</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.view_invoice_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total_signed']" position="after">
+                <field name="dnk_amount_untaxed_usd" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

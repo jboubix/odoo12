@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Denker Sale Quotation Tree - Hide Create Button -->
+    <record id="dnk_view_account_analytic_line_tree_view" model="ir.ui.view">
+        <field name="name">dnk.view.account.analytic.line.tree.view</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="general_account_id"/>
+            </field>
+            <field name="account_id" position="after">
+                <field name="tag_ids" widget="many2many_tags"/>
+            </field>
+            <field name="amount" position="attributes">
+                <attribute name="widget">monetary</attribute>
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

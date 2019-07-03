@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dnk_account_followup_report_view" model="ir.ui.view">
+        <field name="name">dnk_account_followup_report_view</field>
+        <field name="inherit_id" ref="account_reports.template_followup_report"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-if='invoice_address_id.email']" position="replace">
+                <t t-if="partner.email">
+                    <a t-att-href="'mailto:' + partner.email">
+                        <i class='fa fa-envelope' /><t t-esc="' ' + partner.email" />
+                    </a>
+                </t>
+            </xpath>
+        </field>
+    </record>
+</odoo>

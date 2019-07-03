@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_crm_opportunities_view_1" model="ir.ui.view">
+        <field name="name">dnk_crm_opportunities_view_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_create_opportunity_simplified" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                  <field name="dnk_final_customer_id" domain="[('dnk_is_final_customer','=',True)]" options="{'no_create': True}"/>
+                  <!-- dnk_family_id se filtra en models/crm.py -->
+                  <field name="dnk_family_id" required="1" options="{'no_create': True}"/>
+                  <field name="dnk_subfamily_id" domain="[('id','child_of',dnk_family_id),('id','!=',dnk_family_id)]" options="{'no_create': True}"/>
+                  <field name="dnk_product_id" domain="[('categ_id','=',dnk_subfamily_id)]" options="{'no_create': True}"/>
+                  <field name="dnk_pieces" required="1"/>
+                  <field name="dnk_price" required="1"/>
+                  <field name="date_deadline" required="1"/>
+                  <field name="tag_ids" widget="many2many_tags"  options="{'no_create': True}" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <div>USD</div>
+            </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//div[@class='o_row']" position="after">
+                <div class="o_row">
+			        <field name="company_currency" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+			    </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="dnk_crm_case_form_view_oppor_1" model="ir.ui.view">
+        <field name="name">dnk_crm_case_form_view_oppor_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <strong>[<field name="id"/>] </strong>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="dnk_final_customer_id" domain="[('dnk_is_final_customer','=',True)]" options="{'no_create': True}"/>
+                <!-- dnk_family_id se filtra en models/crm.py -->
+                <field name="dnk_family_id" required="1" options="{'no_create': True}"/>
+                <field name="dnk_subfamily_id" domain="[('id','child_of',dnk_family_id),('id','!=',dnk_family_id)]" options="{'no_create': True}"/>
+                <field name="dnk_product_id" domain="[('categ_id','=',dnk_subfamily_id)]" options="{'no_create': True}"/>
+                <field name="dnk_pieces" required="1"/>
+                <field name="dnk_price" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                  <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="after">
+                <span class="oe_grey"> USD </span>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="dnk_view_crm_case_opportunities_filter_1" model="ir.ui.view">
+        <field name="name">dnk_view_crm_case_opportunities_filter_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                  <field name="dnk_final_customer_id" />
+                  <field name="dnk_is_vendor" />
+                  <field name="dnk_family_id" />
+                  <field name="dnk_subfamily_id" />
+                  <field name="dnk_product_id" />
+            </xpath>
+            <xpath expr="//filter[@name='stage']" position="after">
+                <filter name="dnk_family_id" string="- Family" context="{'group_by':'dnk_family_id'}"/>
+                <filter name="dnk_subfamily_id" string="- SubFamily" context="{'group_by':'dnk_subfamily_id'}"/>
+                <filter name="dnk_product_id" string="- Product" context="{'group_by':'dnk_product_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_crm_case_kanban_view_leads_1" model="ir.ui.view">
+        <field name="name">dnk_crm_case_kanban_view_leads_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='text-muted o_kanban_record_subtitle']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@class='text-muted o_kanban_record_subtitle']" position="after">
+                <div class="text-muted o_kanban_record_subtitle">
+                    <t t-if="record.planned_revenue.raw_value"><field name="planned_revenue"/> USD <span t-if="record.partner_id.value">,</span></t>
+                        <span t-if="record.partner_id.value"> <t t-esc="record.partner_id.value"/></span>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='active']" position="after">
+                <field name="dnk_family_id"/>
+            </xpath>
+            <xpath expr="//div[@class='o_kanban_record_bottom']" position="before">
+                <div class="text-muted">
+		              <b>Fam :</b> <span style="font-size:10px" t-if="record.dnk_family_id.raw_value"><t t-esc="record.dnk_family_id.value"/></span>
+		          </div>
+            </xpath>
+            <xpath expr="//div[@class='oe_kanban_bottom_right']" position="before">
+                    <strong>[<field name="id"/>]</strong>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

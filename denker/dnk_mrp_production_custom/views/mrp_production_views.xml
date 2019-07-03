@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_mrp_production_custom_form" model="ir.ui.view">
+        <field name="name">dnk.mrp.production.custom.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='product_id']" position="after">
+                <field name="dnk_product_default_code"/>
+                <field name="dnk_attribute_color_name" attrs="{'invisible': [('dnk_attribute_color', '=', '#313131')]}"/>
+                <field name="dnk_attribute_color" widget="color" attrs="{'invisible': [('dnk_attribute_color', '=', '#313131')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_mrp_production_custom_tree" model="ir.ui.view">
+        <field name="name">dnk.mrp.production.custom.tree</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="workorder_ready"/>
+                <field name="workorder_ready_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_mrp_production_line_custom_kanban" model="ir.ui.view">
+        <field name="name">dnk.mrp.production.line.custom.kanban</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_kanban_view"/>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" position="replace">
+                <kanban class="o_kanban_mobile">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="x_studio_field_wGB7m"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom_id" options="{'no_open':True,'no_create':True}"/>
+                    <field name="date_planned_start"/>
+                    <field name="state"/>
+                    <field name="dnk_product_default_code"/>
+                    <field name="dnk_attribute_color"/>
+                    <field name="dnk_attribute_inverse_color"/>
+                    <field name="dnk_attribute_color_name"/>
+                    <field name="workorder_ready"/>
+                    <field name="workorder_ready_state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <t t-if="record.dnk_attribute_color_name.value != ''">
+                                <t t-set="font_background_color" t-value="'background-color:'+record.dnk_attribute_color.value+';color:'+record.dnk_attribute_inverse_color.value+';'"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="font_background_color" t-value="''"/>
+                            </t>
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click oe_kanban_color_{record.dnk_attribute_color.value}" t-attf-style="{{font_background_color}}">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings mt4">
+                                        <strong class="o_kanban_record_title">
+                                        <span>
+                                            <t t-esc="record.name.value"/><br/></span></strong><t t-esc="record.x_studio_field_wGB7m.value"/><br/><span>[<t t-esc="record.dnk_product_default_code.value"/>]
+                                            <br/>
+                                            <span>
+                                                <span class="pull-left text-left"><t t-esc="record.workorder_ready.value"/>
+                                                  <span t-attf-class="label #{['ready'].indexOf(record.workorder_ready_state.raw_value) &gt; -1 ? 'label-danger' : ['progress'].indexOf(record.workorder_ready_state.raw_value) &gt; -1 ? 'label-success' : 'label-primary'}"><t t-esc="record.workorder_ready_state.value"/></span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <span class="pull-right text-right"><t t-esc="record.product_qty.value"/> <small><t t-esc="record.product_uom_id.value"/></small><br/><span><t t-esc="record.date_planned_start.value and record.date_planned_start.value.split(' ')[0] or False"/></span><br/><span t-attf-class="label #{['draft', 'cancel'].indexOf(record.state.raw_value) &gt; -1 ? 'label-default' : ['none'].indexOf(record.state.raw_value) &gt; -1 ? 'label-danger' : ['confirmed'].indexOf(record.state.raw_value) &gt; -1 ? 'label-warning' : ['done'].indexOf(record.state.raw_value) &gt; -1 ? 'label-success' : 'label-primary'}"><t t-esc="record.state.value"/></span></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </kanban>
+        </field>
+    </record>
+</odoo>

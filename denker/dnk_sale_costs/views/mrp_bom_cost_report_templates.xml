@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="dnk_add_cost_mrp_bom_structure_report" inherit_id="mrp.mrp_bom_cost_report">
+      <xpath expr="//table" position="after">
+          <div>Test Test</div>
+          <div><button string="Add New Cost" type="action" name="dnk_action_view_change_product_costs" class="oe_highlight" colspan="2">HOLA</button></div>
+      </xpath>
+    </template>
+
+</odoo>

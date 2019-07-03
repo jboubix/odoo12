@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <record id="dnk_view_change_product_costs" model="ir.ui.view">
+          <field name="name">Change Product Costs</field>
+          <field name="model">dnk.product.costs</field>
+          <field name="arch" type="xml">
+            <form string="Add New Product Costs">
+                <separator string="Change Costs"/>
+                <group>
+                    <group>
+                            <!--<field name="dnk_cost_std" />-->
+                            <field name="dnk_cost_mp" />
+                            <field name="dnk_cost_mo" />
+                            <field name="dnk_cost_gif"/>
+                            <field name="dnk_product_id"/>
+                            <field name="dnk_product_tmpl_id"/>
+                            <field name="dnk_product_id"/>
+                            <field name="dnk_mrp_product_bom_cost"/>
+                            <field name="dnk_bom_ids"/>
+                            <field name="dnk_bom_lines_ids"/>
+                            <field name="dnk_tmpl_bom_ids"/>
+                            <field name="dnk_tmpl_bom_lines_ids"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="dnk_change_costs" string="_Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+          </field>
+      </record>
+
+      <record id="dnk_action_view_change_product_costs" model="ir.actions.act_window">
+          <field name="name">Change Product Costs</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">dnk.product.costs</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="dnk_view_change_product_costs"/>
+          <field name="target">new</field>
+      </record>
+
+      <record id="dnk_product_costs_form" model="ir.ui.view">
+          <field name="name">dnk_product_costs_form</field>
+          <field name="model">product.template</field>
+          <field name="inherit_id" ref="product.product_template_only_form_view"/>
+          <field name="arch" type="xml">
+                <page name="general_information" position="after">
+                    <page string="- Costs" name="costs"  groups="dnk_product_hide_cost.dnk_show_cost_price">
+                        <group>
+                          <field name="dnk_cost_mp" readonly="1"  invisible="1" />
+                          <field name="dnk_cost_mo" readonly="1"  invisible="1"/>
+                          <field name="dnk_cost_gif" readonly="1" invisible="1"/>
+                          <button string="Add New Cost" type="action"
+                            name="%(dnk_action_view_change_product_costs)d"
+                            class="oe_link oe_read_only" colspan="2"/>
+                          <field name="dnk_product_cost_ids" groups="dnk_product_hide_cost.dnk_show_cost_price" >
+                              <form>
+                                <sheet>
+                                   <group>
+                                      <field name="dnk_cost_mp" readonly="1" />
+                                      <field name="dnk_cost_mo" readonly="1"/>
+                                      <field name="dnk_cost_gif" readonly="1"/>
+                                      <field name="dnk_cost_total" readonly="1"/>
+                                      <field name="dnk_usd_cost_fixed_rate" readonly="1" />
+                                      <field name="create_date" readonly="1" />
+                                      <field name="create_uid" readonly="1" />
+                                  </group>
+                                </sheet>
+                              </form>
+                              <tree delete="false" create="false" edit="false">
+                                <!--<field name="dnk_cost_std" />-->
+                                <field name="dnk_cost_mp" readonly="1" />
+                                <field name="dnk_cost_mo" readonly="1"/>
+                                <field name="dnk_cost_gif" readonly="1"/>
+                                <field name="dnk_cost_total" readonly="1"/>
+                                <field name="create_date" readonly="1" />
+                              </tree>
+                          </field>
+
+                          <field name="bom_ids" >
+                            <tree delete="false" create="false" edit="false">
+                              <!--<field name="dnk_cost_std" />-->
+                              <field name="code" readonly="1" />
+                              <field name="product_qty" readonly="1"/>
+                            </tree>
+                          </field>
+                        </group>
+                    </page>
+                </page>
+          </field>
+      </record>
+
+
+      <!--
+      <record id="dnk_product_costs_tree" model="ir.ui.view">
+          <field name="name">dnk_product_costs_tree</field>
+          <field name="model">product.template</field>
+          <field name="inherit_id" ref="product.product_template_tree_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='standard_price']" position="after">
+                <field name="dnk_costs_currency_id" invisible="1"/>
+                <field name="dnk_cost_mp" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+                <field name="dnk_cost_mo" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+                <field name="dnk_cost_gif" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+              </xpath>
+          </field>
+      </record>
+      -->
+
+
+
+      <record id="dnk_product_product_costs_normal_form" model="ir.ui.view">
+          <field name="name">dnk_product_product_costs_normal_form</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_normal_form_view"/>
+          <field name="arch" type="xml">
+            <page name="general_information" position="after">
+                    <page string="- Costs" name="costs"  groups="dnk_product_hide_cost.dnk_show_cost_price">
+                        <group>
+                          <field name="dnk_cost_mp" readonly="1"  invisible="1"/>
+                          <field name="dnk_cost_mo" readonly="1"  invisible="1"/>
+                          <field name="dnk_cost_gif" readonly="1" invisible="1"/>
+                          <button string="Add New Cost" type="action"
+                            name="%(dnk_action_view_change_product_costs)d"
+                            class="oe_link oe_read_only" colspan="2"/>
+                          <field name="dnk_product_cost_ids" groups="dnk_product_hide_cost.dnk_show_cost_price" >
+                              <form>
+                                <sheet>
+                                   <group>
+                                      <field name="dnk_cost_mp" readonly="1" />
+                                      <field name="dnk_cost_mo" readonly="1"/>
+                                      <field name="dnk_cost_gif" readonly="1"/>
+                                      <field name="dnk_cost_total" readonly="1"/>
+                                      <field name="dnk_usd_cost_fixed_rate" readonly="1" />
+                                      <field name="create_date" readonly="1" />
+                                      <field name="create_uid" readonly="1" />
+                                  </group>
+                                </sheet>
+                              </form>
+                              <tree delete="false" create="false" edit="false">
+                                <!--<field name="dnk_cost_std" />-->
+                                <field name="dnk_cost_mp" readonly="1" />
+                                <field name="dnk_cost_mo" readonly="1"/>
+                                <field name="dnk_cost_gif" readonly="1"/>
+                                <field name="dnk_cost_total" readonly="1"/>
+                                <field name="create_date" readonly="1" />
+                              </tree>
+                          </field>
+                        </group>
+                    </page>
+                </page>
+          </field>
+      </record>
+
+      <record id="dnk_product_product_costs_easy_form" model="ir.ui.view">
+          <field name="name">dnk_product_product_costs_easy_form</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='standard_price']" position="after">
+                  <group col="4" groups="dnk_product_hide_cost.dnk_show_cost_price">
+                      <field name="dnk_costs_currency_id"/>
+                      <field name="dnk_cost_mp"/>
+                      <field name="dnk_cost_mo"/>
+                      <field name="dnk_cost_gif"/>
+                  </group>
+              </xpath>
+          </field>
+      </record>
+
+      <!--
+      <record id="dnk_product_product_costs_tree" model="ir.ui.view">
+          <field name="name">dnk_product_product_costs_tree</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_product_tree_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='price']" position="after">
+                  <field name="standard_price" groups="dnk_product_hide_cost.dnk_show_cost_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                  <field name="dnk_costs_currency_id" invisible="1"/>
+                  <field name="dnk_cost_mp" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+                  <field name="dnk_cost_mo" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+                  <field name="dnk_cost_gif" widget="monetary" groups="dnk_product_hide_cost.dnk_show_cost_price" options="{'currency_field': 'dnk_costs_currency_id', 'field_digits': True}"/>
+                  <field name="currency_id" invisible="1" groups="dnk_product_hide_cost.dnk_show_cost_price"/>
+              </xpath>
+          </field>
+      </record>
+      -->
+  </data>
+
+</odoo>

@@ -1,0 +1,154 @@
+<odoo>
+    <template id="dnk_report_invoice_document_denker" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='row']" position="replace">
+            <table cellpadding="10" width="100%">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr></tr> <!--Lo pongo para que el estilo de la tabla pone el primer renglón oscuro :/-->
+                    <tr>
+                        <td width="40%">
+                            <!--<div t-if="o.partner_id.parent_id" name="invoice_address" >
+                                <address t-field="o.partner_id.parent_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                            </div>
+                            <div t-if="not o.partner_id.parent_id" name="invoice_address">
+                                <address t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                            </div>-->
+                            <div name="invoice_address" >
+                                <address t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                                <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>: <span t-field="o.partner_id.vat"/></div>
+                            </div>
+                        </td>
+                        <td width="40%">
+                            <b>Embarcar a:</b><br/>
+                            <span t-field="o.partner_shipping_id.name" /><br/>
+                            <span t-field="o.partner_shipping_id.street_name" /> <span t-field="o.partner_shipping_id.street_number" /> <span t-field="o.partner_shipping_id.street_number2" />, <span t-field="o.partner_shipping_id.l10n_mx_edi_colony" />
+                            <br/><span t-field="o.partner_shipping_id.city" />, <span t-field="o.partner_shipping_id.state_id.name" /> <span t-field="o.partner_shipping_id.country_id.name" /> <span t-field="o.partner_shipping_id.zip" /><br/>
+                            <br/>
+                            <b>Lugar Expedición: </b><span t-field="o.company_id.city" />, <span t-field="o.company_id.state_id.name" /> <span t-field="o.company_id.country_id.name" />.<br/><br/>
+                        </td>
+                        <td width="20%">
+                            <div style="font-size:14px;">
+                                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Invoice</span>
+                                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                                <span t-if="o.type == 'out_refund'">Credit Note</span>
+                                <span t-if="o.type == 'in_refund'">Vendor Credit Note</span>
+                                <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                                <br/><span t-field="o.number"/>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+
+        <!-- Quito el nombre de la factura porque lo estoy poniendo en la tabla de aquí arribita :)-->
+        <xpath expr="//h2" position="replace">
+        </xpath>
+
+        <!-- Agrego en la tabla el padding para que ocupe menos espacio-->
+        <xpath expr="//table[@name='invoice_line_table']/tbody" position="attributes">
+             <attribute name="style">padding:5px</attribute>
+        </xpath>
+
+        <!--Sequence-->
+        <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[1]" position="before">
+            <th>Sequence</th>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']/tbody/tr[1]/td[1]" position="before">
+            <td><span t-esc="l_index + 1"/></td>
+        </xpath>
+
+        <!--Customer Product Code-->
+        <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[2]" position="after">
+            <th class="text-right">Customer Code</th>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']/tbody/tr[1]/td[2]" position="after">
+            <td class="text-right"><span t-field="l.dnk_customer_product_code"/></td>
+        </xpath>
+
+        <!-- Modificar el tamaño de la fuente de todo el documento-->
+        <xpath expr="//div[@class='page']" position="attributes">
+            <attribute name="style">font-size:75%;</attribute>
+        </xpath>
+
+        <!-- Modificar el tamaño de la fuente de las líneas de la factura-->
+        <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+            <attribute name="style">font-size:85%;</attribute>
+        </xpath>
+
+        <!-- Eliminar los renglones vacíos después de las líneas de la factura-->
+        <xpath expr="//tr[@t-foreach='range(max(5-len(o.invoice_line_ids),0))']" position="replace">
+        </xpath>
+
+        <!-- Eliminar la note del término de pago-->
+        <xpath expr="//p[@t-if='o.payment_term_id']" position="replace">
+        </xpath>
+
+        <!-- Agregar la forma de pago-->
+        <xpath expr="//div[@name='reference']" position="after">
+              <t t-if="o.payment_term_id">
+                  <div class="col-xs-2">
+                      <strong>Payment Form:</strong>
+                      <p><span t-field="o.payment_term_id"/></p>
+                  </div>
+              </t>
+        </xpath>
+
+        <!-- Modificar el tamaño de la fuente del comentario-->
+        <xpath expr="//p[@t-if='o.comment']" position="attributes">
+            <attribute name="style">font-size:8px;</attribute>
+        </xpath>
+
+        <!--UOM - QUITAR COLUMNA UNIDAD DE MEDIDA -->
+        <!--<xpath expr="//table[@name='invoice_line_table']/thead/tr/th[5]" position="after">
+            <th class="text-right">Unit</th>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']/tbody/tr[1]/td[5]" position="after">
+            <td class="text-right"><span t-field="l.uom_id"/></td>
+        </xpath>-->
+
+        <xpath expr="//p[@t-if='o.comment']" position="after">
+            <t t-if="o.l10n_mx_edi_cfdi_uuid">
+                <div style="padding:5px; font-size: 8pt;">
+                    <p>
+                        <div><strong>Currency:</strong><span t-field="o.currency_id"/>-<span t-field="o.currency_id.currency_unit_label"/></div>
+                        <div><strong>Currency Rate:</strong><span t-field="o.currency_id.rate"/></div>
+                    </p><br/>
+                    <div colspan="7" style="text-align: justify;'">
+                        <b>Observaciones: </b>
+                        Debo y pagaré incondicionalmente a la orden de <span t-field="o.company_id.name" /> en la ciudad de <span t-field="o.company_id.city" />
+                        o donde elija el tenedor, el día <span t-field="o.date_due" /> la cantidad de
+                        <span t-field="o.amount_total" /> (<span t-esc="o.l10n_mx_edi_amount_to_text()"/>),
+                        mercancía y servicios amparados en esta factura que he recibido a mi entera satisfacción.
+                        Si este  pagaré no fuera liquidado la fecha de su vencimiento,
+                        pagaré el % mensual desde la fecha de su vencimiento.
+                        Este pagaré es mercantil y se rige por las disposiciones de la ley de Títulos y Operaciones de Crédito.<br/>
+                        <center>
+                        __________________________________<br/>
+                        Firma de Recibido y Conformidad
+                        </center>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+
+
+
+        <!-- Reemplazar la Etiqueta "Description" por "Purchase Order". -->
+        <xpath expr="//div[@t-if='o.name']" position="replace">
+            <div class="col-xs-2" t-if="o.name">
+                <strong>Purchase Order:</strong>
+                <p t-field="o.name"/>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>

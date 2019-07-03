@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <record id="dnk_account_invoice_overwrite_addenda_form_view" model="ir.ui.view">
+        <field name="name">dnk.account.invoice.overwrite.addenda.form.view</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="priority">20</field>
+        <field name="groups_id" eval="[(4, ref('dnk_account_credit_limit_groups.dnk_account_credit_limit_group'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_info']/group/group[2]" position="inside">
+                <button name="l10n_mx_edi_overwrite_addenda" string="Regenerar Addenda" type="object" states="open,paid"/>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

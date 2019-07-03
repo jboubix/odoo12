@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+dnk_account_payment_solution_user_access, Denker Payment Solution User Access,model_dnk_account_payment_solution,account.group_account_user,1,0,0,0

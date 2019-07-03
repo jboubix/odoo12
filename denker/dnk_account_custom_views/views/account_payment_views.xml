@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Denker Sale Quotation Tree - Hide Create Button -->
+    <record id="dnk_view_account_payment_tree_view" model="ir.ui.view">
+        <field name="name">dnk.view.account.payment.tree.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="communication"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Denker Sale Quotation Form - 1. Hide Create Button, 2. Show Send by Mail Button on Done Status -->
+    <record id="dnk_view_sale_quotation_hide_create_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.hide.create.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[8]" position="after">
+                <button name="action_quotation_send" string="Send by Email" type="object" states="done"/>
+            </xpath>
+            <!-- Hacer invisible el campo "Sección" de las Líneas de pedido en el formulario del pedido -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='layout_category_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <!-- Hacer invisible el campo "Etiquetas Analíticas" de las Líneas de pedido en el formulario del pedido -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <!-- -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="user_id" />
+                <field name="team_id" />
+                <!--<field name="warehouse_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations"/>-->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_quotation_show_create_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.show.create.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Denker Sale Quotation Tree - Hide Create Button -->
+    <record id="dnk_view_sale_quotation_hide_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.hide.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_quotation_show_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.quotation.show.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Denker Sale Order Tree - Hide Create Button -->
+    <record id="dnk_view_sale_order_hide_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.hide.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_show_create_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.show.create.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="groups_id" eval="[(4, ref('dnk_group_sale_order_create'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

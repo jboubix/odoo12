@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="dnk_company_product_cost" model="ir.rule">
+        <field name="name">- Denker costs - Company</field>
+        <field name="model_id" ref="model_dnk_product_costs"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[('dnk_company_id','=',[user.company_id.id])]</field>
+    </record>
+  </data>
+</odoo>

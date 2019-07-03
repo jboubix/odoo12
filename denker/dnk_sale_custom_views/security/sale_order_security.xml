@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dnk_group_sale_order_create" model="res.groups">
+            <field name="name">- Sale Order Create</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can create sale quotations and order from its form or view forms</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_sales_category"/>
+        </record>
+
+        <record id="dnk_group_sale_order_create" model="res.groups">
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="dnk_group_product_purchase_page" model="res.groups">
+            <field name="name">- Purchase Page in Product</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can view the purchase page on Product form view</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_purchases_category"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<odoo>
+
+    <record id="dnk_view_order_tree_date" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="confirmation_date" position="after">
+                <field name="dnk_longest_commitment_date"/>
+                <field name="dnk_longest_recommitment_date"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Siempre no mostrar estos campos en las vistas -->
+    <!--<record id="dnk_view_quotation_tree_date" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="date_order" position="after">
+                <field name="dnk_longest_commitment_date"/>
+                <field name="dnk_longest_recommitment_date"/>
+            </field>
+        </field>
+    </record>-->
+
+    <!-- IMPORTANTE: ESTA VISTA YA NO ES NECESARIA, MAS BIEN AGREGAR LA FECHA COMPROMISO A CADA LINEA DEL PEDIDO -->
+    <!-- Esconder el el recuadro "Invoicing and shipping address:" -->
+    <!--<template id="dnk_report_saleorder_document_commitment_date" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//div[@id='informations']" position="inside">
+              <div t-if="doc.dnk_commitment_date and doc.state in ['sale', 'done']" class="col-xs-3">
+                  <strong>Commitment Date:</strong>
+                  <p t-field="doc.dnk_commitment_date"/>
+              </div>
+          </xpath>
+    </template>-->
+
+    <!-- Mostrar el campo dnk_commitment_date (Delivery Date) sólo si la order está confirmada -->
+    <template id="report_saleorder_document_product_delivery_date" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/thead/tr/th" position="after">
+              <th t-if="doc.state in ('done', 'lock')" class="text-right">Delivery Date</th>
+          </xpath>
+
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/tbody/t[1]/t[2]/tr/td[1]" position="after">
+              <td t-if="doc.state in ('done', 'lock')" class="text-right"><span t-field="l.dnk_commitment_date"/></td>
+          </xpath>
+    </template>
+
+    <!-- Colocar siempre a la vista los campos dnk_commitment_date y commitment_date -->
+    <record id="dnk_view_sale_order_form_show_sale_order_dates" model="ir.ui.view">
+        <field name="name">dnk.sale.order.form.show.sale.order.dates</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="dnk_longest_commitment_date"/>
+                <field name="dnk_longest_recommitment_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_sale_order_commitment_date_form_view">
+        <field name="name">dnk.sale.order.commitment.date.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                <field name="dnk_commitment_date" />
+                <field name="dnk_recommitment_date" attrs="{'readonly': [('state', 'not in', ('sale', 'done'))]}" />
+                <field name="dnk_recommitment_date_changed" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="customer_lead"/>
+                <field name="dnk_commitment_date"/>
+                <field name="dnk_recommitment_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_line_ext_tree_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.ext.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="dnk_commitment_date"/>
+                <field name="dnk_recommitment_date"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

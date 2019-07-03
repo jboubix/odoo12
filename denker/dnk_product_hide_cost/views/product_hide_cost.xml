@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Sale price-->
+
+    <record model="ir.ui.view" id="dnk_show_sale_price_form_product_template">
+        <field name="name">dnk_show_sale_price_form_product_template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='list_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_price_currency_id']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_sale_price_tree_product_template">
+        <field name="name">dnk_show_sale_price_tree_product_template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='list_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_sale_price_form_product_product">
+        <field name="name">dnk_show_sale_price_form_product_product</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_price_currency_id']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_sale_price_tree_product_product">
+        <field name="name">dnk_show_sale_price_tree_product_product</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_sale_price_kanban_product_template">
+        <field name="name">dnk_show_sale_price_kanban_product_template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+            <xpath expr="//div/div/ul/li/field[@name='lst_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_sale_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Cost price-->
+
+    <record model="ir.ui.view" id="dnk_show_cost_price_form_product_template">
+        <field name="name">dnk_show_cost_price_form_product_template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost_currency_id']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_product_theoretical_cost_tree_view">
+        <field name="name">dnk.show.product.theoretical.cost.tree.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="dnk_sale_theoretical_cost.dnk_product_product_theoretical_cost_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_theoretical_cost_form_product_template">
+        <field name="name">dnk.show.theoretical.cost.form.product.template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="dnk_sale_theoretical_cost.dnk_product_template_theoretical_cost_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="dnk_show_cost_price_tree_product_template">
+        <field name="name">dnk_show_cost_price_tree_product_template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost_currency_id']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dnk_show_cost_price_form_product_product">
+        <field name="name">dnk_show_cost_price_form_product_product</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//label[@for='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_theoretical_cost_currency_id']" position="attributes">
+                <attribute name="groups">dnk_product_hide_cost.dnk_show_cost_price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

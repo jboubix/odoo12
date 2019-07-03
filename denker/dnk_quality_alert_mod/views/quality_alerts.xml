@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="dnk_quality_alert_tree_view_1" model="ir.ui.view">
+        <field name="name">dnk_quality_alert_tree_view_1</field>
+        <field name="model">quality.alert</field>
+        <field name="inherit_id" ref="quality.quality_alert_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='check_id']" position="attributes" >
+                 <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="after" >
+                 <field name="create_date"/>
+                 <field name="product_id"/>
+                 <field name="x_studio_field_uxG4K"/>
+                 <field name="user_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_quality_alert_kanban_view" model="ir.ui.view">
+        <field name="name">dnk.quality.alert.kanban.view</field>
+        <field name="model">quality.alert</field>
+        <field name="inherit_id" ref="quality.quality_alert_view_kanban"/>
+        <field name="arch" type="xml">
+            <field name="priority" position="after">
+                <field name="dnk_product_default_code"/>
+            </field>
+            <field name="product_tmpl_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="product_tmpl_id" position="before">
+                [<field name="dnk_product_default_code"/>]
+            </field>
+            <div class="oe_kanban_bottom_left" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </div>
+        </field>
+    </record>
+
+    <record id="dnk_quality_alert_form_view" model="ir.ui.view">
+        <field name="name">dnk.quality.alert.form.view</field>
+        <field name="model">quality.alert</field>
+        <field name="inherit_id" ref="quality.quality_alert_view_form"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="dnk_product_default_code"/>
+            </field>
+        </field>
+    </record>
+  </data>
+</odoo>

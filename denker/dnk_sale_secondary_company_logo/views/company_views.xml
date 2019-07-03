@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <record id="view_sale_secondary_company_logo_form_view" model="ir.ui.view">
+        <field name="name">view.sale.secondary.company.logo.form.view</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="priority">250</field>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook" position="before">
+              <group>
+                  <field name="logo2" widget="image" class="oe_avatar"/>
+              </group>
+            </xpath>
+            <!--<field name="logo" position="after">
+                <field name="logo2" widget="image"  class="oe_avatar"/>
+            </field>-->
+        </field>
+    </record>
+  </data>
+</odoo>

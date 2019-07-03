@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Agrego campo Untaxed Amount en la vista de lista de Sale Order. -->
+    <data>
+        <record id="dnk_sale_usd_sale_order_list_view_1" model="ir.ui.view">
+            <field name="name">dnk_sale_usd_sale_order_list_view_1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="dnk_amount_untaxed_usd" sum="- Total Untaxed USD"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Agrego campo Untaxed Amount en la vista de lista de Sale Order. -->
+        <record id="dnk_sale_usd_sale_order_graph_view_1" model="ir.ui.view">
+            <field name="name">dnk_sale_usd_sale_order_pivot_view_1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="dnk_amount_untaxed_usd" type="measure"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Agrego campo Untaxed Amount en la vista de lista de Quotations. -->
+        <record id="dnk_sale_usd_sale_quotation_list_view_1" model="ir.ui.view">
+            <field name="name">dnk_sale_usd_sale_quotation_list_view_1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="dnk_amount_untaxed_usd" sum="- Total Untaxed USD"/> 
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="dnk_account_add_proof_of_delivery_form_view_1" model="ir.ui.view">
+            <field name="name">dnk_account_add_proof_of_delivery_form_view_1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <page name="other_info" position="after">
+                    <page string="- Proof of Delivery" name="proof_of_delivery">
+                        <group>
+                            <field name="dnk_img_proof_of_delivery_name" invisible="1" />
+                            <field name="dnk_img_proof_of_delivery" filename="dnk_img_proof_of_delivery_name" widget="image" invisible="0"/>
+                            <field name="dnk_img_tmp_proof_of_delivery" options="{'size': [150, 140]}" filename="dnk_img_proof_of_delivery_name" widget="image" invisible="1"/>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>

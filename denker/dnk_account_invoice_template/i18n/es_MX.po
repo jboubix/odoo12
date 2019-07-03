@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_account_invoice_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-02 18:30+0000\n"
+"PO-Revision-Date: 2019-01-02 18:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "),\n"
+"                        mercancía y servicios amparados en esta factura que he recibido a mi entera satisfacción.\n"
+"                        Si este  pagaré no fuera liquidado la fecha de su vencimiento,\n"
+"                        pagaré el % mensual desde la fecha de su vencimiento.\n"
+"                        Este pagaré es mercantil y se rige por las disposiciones de la ley de Títulos y Operaciones de Crédito.<br/>"
+msgstr "),\n"
+"                        mercancía y servicios amparados en esta factura que he recibido a mi entera satisfacción.\n"
+"                        Si este  pagaré no fuera liquidado la fecha de su vencimiento,\n"
+"                        pagaré el % mensual desde la fecha de su vencimiento.\n"
+"                        Este pagaré es mercantil y se rige por las disposiciones de la ley de Títulos y Operaciones de Crédito.<br/>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<b>Embarcar a:</b><br/>"
+msgstr "<b>Embarcar a:</b><br/>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<b>Observaciones: </b>\n"
+"                        Debo y pagaré incondicionalmente a la orden de"
+msgstr "<b>Observaciones: </b>\n"
+"                        Debo y pagaré incondicionalmente a la orden de"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<br/>\n"
+"                            <br/>\n"
+"                            <b>Lugar Expedición: </b>"
+msgstr "<br/>\n"
+"                            <br/>\n"
+"                            <b>Lugar Expedición: </b>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<strong>Currency Rate:</strong>"
+msgstr "<strong>Tipo de Cambio:</strong>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<strong>Currency:</strong>"
+msgstr "<strong>Moneda:</strong>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "<strong>Purchase Order:</strong>"
+msgstr "<strong>Orden De Compra:</strong>"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Cancelled Invoice"
+msgstr "Factura cancelada"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Credit Note"
+msgstr "Rectificativa"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Customer Code"
+msgstr "Código Cliente"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Draft Invoice"
+msgstr "Factura borrador"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Sequence"
+msgstr "Partida"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Unit"
+msgstr "Unidad"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Vendor Bill"
+msgstr "Factura de proveedor"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "Vendor Credit Note"
+msgstr "Rectificativa de proveedor"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "__________________________________<br/>\n"
+"                        Firma de Recibido y Conformidad"
+msgstr "__________________________________<br/>\n"
+"                        Firma de Recibido y Conformidad"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "en la ciudad de"
+msgstr "en la ciudad de"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "la cantidad de"
+msgstr "la cantidad de"
+
+#. module: dnk_account_invoice_template
+#: model:ir.ui.view,arch_db:dnk_account_invoice_template.dnk_report_invoice_document_denker
+msgid "o donde elija el tenedor, el día"
+msgstr "o donde elija el tenedor, el día"

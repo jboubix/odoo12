@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="dnk_filter_user_product_category_allowed" model="ir.rule">
+            <field name="name">- Filter Product Category Allowed</field>
+            <field name="model_id" ref="product.model_product_category"/>
+            <field name="domain_force">[('id', 'in', [ p.id for p in user.dnk_product_category_allowed_ids ])]</field>
+        </record>
+
+        <record id="dnk_filter_user_product_allowed" model="ir.rule">
+            <field name="name">- Filter Product Allowed</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="domain_force">[('categ_id', 'in', [ p.id for p in user.dnk_product_category_allowed_ids ])]</field>
+            <field name="perm_read">False</field>
+        </record>
+
+    </data>
+</openerp>

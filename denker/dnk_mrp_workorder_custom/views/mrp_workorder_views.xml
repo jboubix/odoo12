@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_mrp_workorder_custom_form" model="ir.ui.view">
+        <field name="name">dnk.mrp.workorder.custom.form</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="quality_mrp.mrp_workorder_view_form_tablet"/>
+        <field name="arch" type="xml">
+            <!--<div class="workorder_bar_left o_workorder_bar_content" position="attributes">
+                <attribute name="style">display: table;</attribute>
+            </div>-->
+
+            <div class="workorder_bar" position="attributes">
+                <attribute name="style">display: table;</attribute>
+            </div>
+
+            <xpath expr="//div[@class='workorder_actions']/div[1]" position="after" >
+                <div class="o_workorder_bar_content o_workorder_bar_content_center">
+                    <field name="dnk_attribute_color_name" style="font-size: 20px;"/><field name="dnk_attribute_color" widget="color"/>
+                    <!--<div style="background-color:yellow; height:100%; width:100%; border-style:solid; border-width:4px;"></div>-->
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_mrp_workorder_line_custom_kanban" model="ir.ui.view">
+        <field name="name">dnk.mrp.workorder.line.custom.kanban</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_kanban"/>
+        <field name="arch" type="xml">
+           <kanban class="o_kanban_small_column" position="replace">
+              <kanban class="o_kanban_small_column" create="0">
+                    <field name="name"/>
+                    <field name="production_id"/>
+                    <field name="state"/>
+                    <field name="workcenter_id"/>
+                    <field name="product_id"/>
+                    <field name="dnk_product_default_code"/>
+                    <field name="qty_production"/>
+                    <field name="product_uom_id"/>
+                    <field name="dnk_attribute_color"/>
+                    <field name="dnk_attribute_inverse_color"/>
+                    <field name="dnk_attribute_color_name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <t t-if="record.dnk_attribute_color_name.value != ''">
+                                <t t-set="font_background_color" t-value="'background-color:'+record.dnk_attribute_color.value+';color:'+record.dnk_attribute_inverse_color.value+';'"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="font_background_color" t-value="''"/>
+                            </t>
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click oe_kanban_color_{record.dnk_attribute_color.value}" t-attf-style="{{font_background_color}}">
+                                <div class="oe_kanban_content">
+                                    <strong><div style="font-size:30px;"><t t-esc="record.production_id.value"/></div></strong>
+                                    <div class="row">
+                                        <div class="col-xs-6 o_kanban_primary_left" style="font-size:14px;">
+                                            <t t-esc="record.name.value"/>
+                                        </div>
+                                        <div class="col-xs-6 o_kanban_primary_right" style="font-size:14px;">
+                                            <span><t t-esc="record.dnk_attribute_color_name.value"/></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 o_kanban_primary_left" style="font-size:20px;">
+                                            <span><t t-esc="record.dnk_product_default_code.value"/></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 o_kanban_primary_left" style="font-size:20px;">
+                                            <span><t t-esc="record.qty_production.value"/> <t t-esc="record.product_uom_id.value"/></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+              </kanban>
+          </field>
+      </record>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="dnk_purchase_order_sale_order_lines_form_view" model="ir.ui.view">
+            <field name="name">dnk.purchase.order.sale.order.lines.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[1]" position="after">
+                  <page string="- Sale Information">
+                      <field name="dnk_sale_order_line_ids" nolabel="1" readonly="1">
+                          <tree editable="bottom" create="0" delete="0">
+                              <field name="order_id"/>
+                              <field name="product_id"/>
+                              <field name="order_partner_id"/>
+                              <field name="product_uom_qty" sum="Total Sales Qty"/>
+                              <field name="qty_delivered"/>
+                              <field name="state"/>
+                              <field name="salesman_id"/>
+                              <field name="team_id"/>
+                          </tree>
+                      </field>
+                  </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!--<record id="dnk_purchase_order_edit_sale_order_lines_form_view" model="ir.ui.view">
+            <field name="name">dnk.purchase.order.edit.sale.order.lines.form.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="dnk_purchase_order_sale_order_lines_form_view"/>
+            <field name="groups_id" eval="[(4, ref('dnk_mrp_so_po_mo_link.dnk_purchase_sale_order_lines_link'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='dnk_sale_order_line_ids']" position="attributes">
+                    <attribute name="readonly">False</attribute>
+                </xpath>
+            </field>
+        </record>-->
+
+        <record id="purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//field[@name='order_line']/tree/field[@name='move_dest_ids']" position="after">
+                    <field name="dnk_procurement_group_id" group_id="base.group_no_one" />
+                </xpath>
+                <xpath expr="//notebook//field[@name='order_line']/form//field[@name='date_planned']" position="after">
+                    <field name="dnk_procurement_group_id" group_id="base.group_no_one" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

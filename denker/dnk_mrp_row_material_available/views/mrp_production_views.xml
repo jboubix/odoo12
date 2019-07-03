@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- Account Journal -->
+        <record id="dnk_view_mrp_row_material_available_hide_done_button_view_form" model="ir.ui.view">
+            <field name="name">dnk.view.mrp.row.material.available.hide.done.buttonview.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <button name="button_mark_done" position="attributes">
+										<attribute name="attrs">{'invisible': ['|', '|', ('check_to_done', '=', False), ('consumed_less_than_planned', '=', True), ('availability', '!=', 'assigned')]}</attribute>
+                </button>
+								<button name="post_inventory" position="attributes">
+										<attribute name="attrs">{'invisible': ['|', ('post_visible', '=', False), ('availability', '!=', 'assigned')]}</attribute>
+								</button>
+            </field>
+        </record>
+
+				<record id="dnk_view_mrp_row_material_available_show_done_button_view_form" model="ir.ui.view">
+            <field name="name">dnk.view.mrp.row.material.available.show.done.button.view.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+						<field name="groups_id" eval="[(4, ref('dnk_mrp_row_material_available.dnk_group_row_material_unavailable'))]"/>
+            <field name="arch" type="xml">
+								<button name="button_mark_done" position="attributes">
+										<attribute name="attrs">{'invisible': ['|', ('check_to_done', '=', False), ('consumed_less_than_planned', '=', True)]}</attribute>
+								</button>
+								<button name="post_inventory" position="attributes">
+										<attribute name="attrs">{'invisible': [('post_visible', '=', False)]}</attribute>
+								</button>
+            </field>
+        </record>
+
+	</data>
+</odoo>

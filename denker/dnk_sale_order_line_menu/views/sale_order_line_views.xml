@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dnk_view_sale_order_line_tree" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority" eval="1"/>
+        <field name="sequence" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Sale Orders Lines" create="false" delete="false" decoration-bf="dnk_final_commitment_date&lt;current_date">
+                <field name="order_id"/>
+                <field name="order_partner_id"/>
+                <field name="name"/>
+                <field name="product_uom_qty"/>
+                <field name="qty_delivered"/>
+                <field name="dnk_qty_to_deliver"/>
+                <field name="dnk_usd_amount_to_deliver"/>
+                <field name="qty_invoiced"/>
+                <field name="product_uom"/>
+                <!--<field name="price_unit" widget="monetary"/>-->
+                <field name="currency_id" invisible="1"/>
+                <field name="dnk_final_commitment_date" options='{"bg_color": "red: dnk_final_commitment_date &lt; current_date", "fg_color": "white: dnk_final_commitment_date &lt; current_date"}'/>
+                <!--<field name="dnk_commitment_date"/>-->
+                <!--<field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>-->
+                <field name="state"/>
+                <field name="invoice_status"/>
+                <!--<field name="salesman_id"/>
+                <field name="dnk_subfamily_id"/>-->
+                <field name="dnk_family_id"/>
+                <!--<field name="dnk_color_id"/>
+                <field name="team_id"/>
+                <field name="dnk_order_warehouse_id"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="priority" eval="1"/>
+        <field name="sequence" eval="1"/>
+        <field name="arch" type="xml">
+            <form string="Sale Orders Lines" create="false" edit="true">
+              <sheet>
+                <group>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="qty_invoiced" invisible="1"/>
+
+                        <field name="product_updatable" invisible="1"/>
+                        <field name="product_id" context="{'partner_id':order_id.partner_id, 'quantity':product_uom_qty, 'pricelist':order_id.pricelist_id, 'uom':product_uom, 'company_id': order_id.company_id}" attrs="{'readonly': [('product_updatable', '=', False)]}" force_save="1"/>
+                        <field name="dnk_qty_to_deliver"/>
+                        <field name="dnk_usd_amount_to_deliver" widget="monetary"/>
+                        <field name="dnk_subfamily_id"/>
+                        <field name="dnk_family_id"/>
+                        <field name="dnk_color_id"/>
+                        <field name="layout_category_id" groups="sale.group_sale_layout"/>
+                        <field name="invoice_status" invisible="1"/>
+                        <field name="qty_to_invoice" invisible="1"/>
+                        <field name="qty_delivered_updateable" invisible="1"/>
+                        <field name="price_subtotal" invisible="1"/>
+                        <label for="product_uom_qty" string="Ordered Quantity"/>
+                        <div>
+                            <field context="{'partner_id':order_id.partner_id, 'quantity':product_uom_qty, 'pricelist':order_id.pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': order_id.company_id}" name="product_uom_qty" class="oe_inline"/>
+                            <field name="product_uom" groups="product.group_uom" class="oe_inline oe_no_button" attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}"/>
+                        </div>
+                        <label for="qty_delivered" string="Delivered Quantity" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        <div attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}">
+                            <field name="qty_delivered" attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}"/>
+                        </div>
+                        <label for="qty_invoiced" string="Invoiced Quantity" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        <div attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}">
+                            <field name="qty_invoiced" attrs="{'invisible': [('state', 'not in', ['sale', 'done'])]}"/>
+                        </div>
+                        <field name="price_unit"/>
+                        <label for="discount" groups="sale.group_discount_per_so_line"/>
+                        <div name="discount" groups="sale.group_discount_per_so_line">
+                            <field name="discount" class="oe_inline"/> %
+                        </div>
+                    </group>
+                    <group>
+                        <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use','=','sale'),('company_id','=',order_id.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                        <label for="customer_lead"/>
+                        <div>
+                            <field name="customer_lead" class="oe_inline"/> days
+                        </div>
+                        <label for="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                        <div>
+                            <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_accounting" options="{'color_field': 'color'}"/>
+                        </div>
+                        <label for="team_id"/>
+                        <div>
+                            <field name="team_id"/>
+                        </div>
+                        <label for="dnk_final_commitment_date"/>
+                        <div>
+                            <field name="dnk_final_commitment_date"/>
+                        </div>
+                        <label for="dnk_order_warehouse_id"/>
+                        <div>
+                            <field name="dnk_order_warehouse_id"/>
+                        </div>
+                    </group>
+                </group>
+                <label for="name"/>
+                <field name="name"/>
+                <div groups="base.group_no_one">
+                    <label for="invoice_lines"/>
+                    <field name="invoice_lines"/>
+                </div>
+                <field name="state" invisible="1"/>
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_pivot" model="ir.ui.view">
+      <field name="name">dnk.view.sale.order.line.pivot</field>
+      <field name="model">sale.order.line</field>
+      <field name="arch" type="xml">
+        <pivot string="Sale Orders Lines">
+          <field name="team_id" type="col"/>
+          <field name="dnk_commitment_date" interval="month" type="row"/>
+        </pivot>
+      </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_filter" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.select</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Sale Orders Lines">
+                <field name="order_id" string="Sales Order"/>
+                <field name="order_partner_id" operator="child_of"/>
+                <field name="name" string="Sales Order Line" filter_domain="['|','|',('name','ilike',self),('order_id.client_order_ref','ilike',self),('order_partner_id','child_of',self)]"/>
+                <field name="salesman_id"/>
+                <field name="team_id" string="Sales Channel"/>
+                <field name="product_id"/>
+                <separator/>
+                <filter string="Para Entregar Hoy" name="entregar_hoy" domain="[('dnk_final_commitment_date','&lt;=', context_today().strftime('%%Y-%%m-%%d 23:59:59')),('dnk_final_commitment_date','&gt;=', context_today().strftime('%%Y-%%m-%%d 00:00:00'))]"/>
+                <filter string="Atrasado" name="atrasado" domain="[('dnk_final_commitment_date','&lt;',context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Atrasado 15 días o más" name="atrasado_15_dias" domain="[('dnk_final_commitment_date','&lt;',(context_today()-relativedelta(days=15)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Invoiced Not Delivered Lines" domain="[('dnk_is_invoiced_not_delivered','=',True)]" name="invoiced_not_delivered_filter"/>
+                <filter string="Pending Delivery Lines" domain="[('dnk_is_pending_delivery','=',True)]" name="pending_delivery_filter"/>
+                <filter string="My Orders Lines" domain="[('salesman_id','=',uid)]" name="my_sale_orders_filter"/>
+                <filter string="Confirmed on This Month" name="this_month" domain="[('dnk_order_confirmation_date', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
+                <separator/>
+                <filter string="Unread Messages" name="message_needaction" domain="[('order_id.message_needaction','=',True)]"/>
+                <separator/>
+                <filter string="My Activities" name="activities_my" domain="[('order_id.activity_ids.user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Late Activities" name="activities_overdue" domain="[('order_id.activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]" help="Show all records which has next action date is before today"/>
+                <filter string="Today Activities" name="activities_today" domain="[('order_id.activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Future Activities" name="activities_upcoming_all" domain="[('order_id.activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))                         ]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Salesperson" domain="[]" context="{'group_by':'salesman_id'}"/>
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'order_partner_id'}"/>
+                    <filter string="Requested Date Month" domain="[]" context="{'group_by':'dnk_commitment_date'}"/>
+                    <filter string="- Subfamily" domain="[]" context="{'group_by':'dnk_subfamily_id'}" name="dnk_subfamily_id"/>
+                    <filter string="- Family" domain="[]" context="{'group_by':'dnk_family_id'}" name="dnk_family_id"/>
+                    <filter string="- Color" domain="[]" context="{'group_by':'dnk_color_id'}" name="dnk_color_id"/>
+                    <filter string="- Warehouse" domain="[]" context="{'group_by':'dnk_order_warehouse_id'}" name="dnk_order_warehouse_id"/>
+                </group>
+                <separator/>
+                <filter string="Sales" name="sales" domain="[('state','in',('progress','done'))]"/>
+                <separator/>
+                <filter string="To Invoice" domain="[('invoice_status','=','to invoice')]"/>
+                <filter string="Upselling" domain="[('invoice_status','=','upselling')]"/>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_sale_order_line" model="ir.actions.act_window">
+        <field name="name">Sale Orders Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="context">{}</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            </p>
+        </field>
+    </record>
+
+    <!-- Mostrar el campo Esconder el el recuadro "Invoicing and shipping address:" -->
+    <template id="report_saleorder_document_product_delivery_date" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/thead/tr/th" position="after">
+              <th t-if="doc.state in ('draft', 'sent')" class="text-right">Delivery Days</th>
+          </xpath>
+
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/tbody/t[1]/t[2]/tr/td[1]" position="after">
+              <td t-if="doc.state in ('draft', 'sent')" class="text-right"><span t-field="l.dnk_customer_lead"/></td>
+          </xpath>
+    </template>
+
+    <record id="action_sale_order_line_tree" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_tree"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <record id="action_sale_order_line_form" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_form"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <record id="action_sale_order_line_pivot" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_pivot"/>
+        <field name="act_window_id" ref="action_sale_order_line"/>
+    </record>
+
+    <menuitem action="action_sale_order_line" name="- Sale Orders Lines"
+        id="menu_sale_order_line" parent="sale.sale_order_menu"
+        sequence="40"/>
+
+    <menuitem action="action_sale_order_line" name="- Sale Orders Lines"
+        id="menu_sale_order_line_on_mrp" parent="mrp.menu_mrp_manufacturing"
+        sequence="40"/>
+
+    <menuitem action="action_sale_order_line" name="- Sale Orders Lines"
+        id="menu_sale_order_line_on_purchase" parent="purchase.menu_purchase_control"
+        sequence="40"/>
+
+</odoo>

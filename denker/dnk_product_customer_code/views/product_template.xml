@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="dnk_product_customer_code_view_form_1" model="ir.ui.view">
+        <field name="name">dnk_product_customer_code_view_form_1</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <group name="inventory" position="after">
+                <separator string="Customers"/>
+                <field name="dnk_customer_ids" context="{'default_dnk_product_tmpl_id': context.get('dnk_product_tmpl_id', active_id)}" >
+                    <tree string="Customers" editable="bottom">
+                        <field name="dnk_sequence" widget="handle" />
+                        <field name="dnk_partner_id"/>
+                        <field name="dnk_product_code" />
+                    </tree>
+                </field>
+            </group>
+        </field>
+    </record>
+
+</odoo>

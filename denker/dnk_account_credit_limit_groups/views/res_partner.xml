@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_account_credit_limit_group_1" model="ir.ui.view">
+        <field name="name">dnk_account_credit_limit_group_1</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="is_company" position="after">
+                <field name="dnk_edit_accounting_fields" invisible="1"/>
+            </field>
+            <!-- Sale-->
+                <xpath expr="//field[@name='property_payment_term_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='credit_limit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='block_sales']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='trust']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+
+            <!-- Purchase-->
+                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+
+            <!-- Fiscal Information-->
+                <xpath expr="//field[@name='property_account_position_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+
+            <!-- Accounting Entries-->
+                <xpath expr="//field[@name='property_account_receivable_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_account_payable_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+        </field>
+    </record>
+    <record id="dnk_account_credit_limit_group_2" model="ir.ui.view">
+        <field name="name">dnk_account_credit_limit_group_2</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="dnk_account_form_customer_update.dnk_res_partner_l10n_mx_edi_form_view_1"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='dnk_l10n_mx_edi_usage']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='dnk_l10n_mx_edi_payment_method_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+                </xpath>
+        </field>
+    </record>
+</odoo>

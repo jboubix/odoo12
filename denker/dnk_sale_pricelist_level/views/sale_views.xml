@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<!-- Denker Sale Quotation Form - 1. Hide Create Button, 2. Show Send by Mail Button on Done Status -->
+		<record id="dnk_view_sale_dnk_pricelist_level_form" model="ir.ui.view">
+				<field name="name">dnk.view.sale.pricelist.level.form</field>
+				<field name="model">sale.order</field>
+				<field name="inherit_id" ref="sale.view_order_form"/>
+				<field name="arch" type="xml">
+						<!-- Hacer invisible el campo "Sección" de las Líneas de pedido en el formulario del pedido -->
+						<xpath expr="//field[@name='pricelist_id']" position="attributes">
+								<attribute name="domain">[('id', 'in', dnk_price_list_domain_ids)]</attribute>
+						</xpath>
+						<xpath expr="//field[@name='pricelist_id']" position="after">
+								<field name="dnk_price_list_domain_ids" invisible="1"/>
+						</xpath>
+				</field>
+		</record>
+</odoo>

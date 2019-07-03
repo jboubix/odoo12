@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Agrego campo Untaxed Amount en la vista de lista de Payments. -->
+    <data>
+        <record id="dnk_account_usd_account_invoice_payment_tree_view_1" model="ir.ui.view">
+            <field name="name">dnk_account_usd_account_invoice_payment_tree_view_1</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount']" position="before">
+                    <field name="dnk_amount_usd" sum="- Amount USD" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

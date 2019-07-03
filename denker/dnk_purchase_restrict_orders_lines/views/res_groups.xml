@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="dnk_purchase_orders_lines_admin" model="res.groups">
+      <field name="name">Admin Purchase Orders Lines</field>
+      <field name="comment">Edit Purchase Orders Lines</field>
+      <field name="category_id" ref="dnk_groups_categories.dnk_purchases_category"/>
+    </record>
+  </data>
+</odoo>

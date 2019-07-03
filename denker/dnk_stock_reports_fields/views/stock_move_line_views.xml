@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="dnk_stock_reports_fields_stock_move_line_search_search_view" model="ir.ui.view">
+      <field name="name">dnk.stock.reports.fields.stock.move.line.search_search_view</field>
+      <field name="model">stock.move.line</field>
+      <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+      <field name="arch" type="xml">
+          <filter name="done" position="after">
+              <filter string="Today" name="today_and_yesterday" domain="[('state','=','done'),('date', '>=', (context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+              <filter string="Last 15 days" name="last_15_days" domain="[('state','=','done'),('date', '>=', (context_today()-datetime.timedelta(days=15)).strftime('%Y-%m-%d'))]"/>
+              <!--<separator/>
+              <filter string="+ 15 Dias Anteriores" name="15 dias Anteriores" domain="[('date','>=',(context_today() - datetime.timedelta(15)).strftime('%%Y-%%m-%%d'))]"/>
+              <filter string="+ 9 Semanas" domain="[('date', '&gt;=', ((context_today()+relativedelta(weeks=-9,days=1, weekday=0)).strftime('%%Y-%%m-%%d'))),('date', '&lt;=', ((context_today()+relativedelta(weeks=-0,weekday=6)).strftime('%%Y-%%m-%%d')))]"/>
+              <filter string="+ Semana Actual" domain="[('date', '&gt;=', ((context_today()+relativedelta(weeks=-1,days=1, weekday=0)).strftime('%%Y-%%m-%%d'))),('date', '&lt;=', ((context_today()+relativedelta(weeks=-0,weekday=6)).strftime('%%Y-%%m-%%d')))]"/>
+              <filter string="+ Semana Pasada" domain="[('date', '&gt;=', ((context_today()+relativedelta(weeks=-2,days=1, weekday=0)).strftime('%%Y-%%m-%%d'))),('date', '&lt;=', ((context_today()+relativedelta(weeks=-1,weekday=6)).strftime('%%Y-%%m-%%d')))]"/>
+              <filter string="+ Ayer y Hoy" name="Ayer y Hoy" domain="[('date','&lt;',(context_today()+relativedelta(days=7)).strftime('%Y-%m-%d 23:59:59')), ('date','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+              <separator/>-->
+          </filter>
+      </field>
+    </record>
+  </data>
+</odoo>

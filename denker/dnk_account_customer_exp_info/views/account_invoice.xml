@@ -1,0 +1,18 @@
+<!-- NO la voy a poner porque el campo l10n_mx_edi_umt_aduana_id me está marcando error, la pondré a mano :/ ...  Lo lamento...-->
+<!--<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_account_customer_ext_trade_form_1" model="ir.ui.view">
+        <field name="name">dnk_account_customer_ext_trade_form_1</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_info']" position="inside">
+                <group>
+                    <group>
+                        <field name="dnk_customer_exp_info" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>-->

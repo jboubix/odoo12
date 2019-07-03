@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--Email template -->
+        <record id="dnk_recommitment_date_email_template_edi_sale" model="mail.template">
+            <field name="name">Dnk - Commitment Date - Send by Email</field>
+            <field name="email_from">${object.order_id.user_id.email}</field>
+            <field name="subject">${object.company_id.name} ${object.order_id.state in ('draft', 'sent') and 'Quotation' or 'Order'} (Ref ${object.order_id.client_order_ref or 'n/a' }, Product ${object.dnk_customer_product_code or ''} ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.order_id.partner_id.id}</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.order_id.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.order_id.partner_id.name}
+% set access_action = object.with_context(force_website=True).get_access_action()
+% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'
+% set doc_name = 'quotation' if object.order_id.state in ('draft', 'sent') else 'order'
+% set pay_sign_name =  object.order_id.get_portal_confirmation_action()
+% set access_name = is_online and object.order_id.state in ('draft', 'sent') and pay_sign_name in ('pay', 'sign') and 'Accept and %s online' % pay_sign_name or 'View %s' % doc_name
+% set access_url = is_online and object.get_mail_url() or ''
+% set dnk_customer_product_code = object.dnk_customer_product_code if object.dnk_customer_product_code else ''
+
+% if object.order_id.partner_id.parent_id:
+    (<i>${object.order_id.partner_id.parent_id.name}</i>)
+% endif
+,</p>
+<p>
+The <strong>Commitment Date</strong> in the your PO <strong>${object.order_id.client_order_ref}</strong> (${doc_name} <strong>${object.order_id.name}</strong>), Product <strong>${dnk_customer_product_code}</strong> ${object.name}
+
+% if object.order_id.origin:
+(with reference: ${object.order_id.origin} )
+% endif
+has been changed from <strong>${object.dnk_commitment_date}</strong> to <strong>${object.dnk_recommitment_date.split(' ')[0]}</strong>.
+</p>
+
+<p>We apologize for any inconvenience this may cause.</p>
+
+<!--
+% if is_online and not ctx.get('proforma'):
+    <br/><br/>
+    <center>
+        <a href="${access_url}" style="background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;" class="o_default_snippet_text">${access_name}</a>
+        <br/><br/><br/>
+        <span style="color:#888888">(or view attached PDF)</span>
+    </center>
+    <br/>
+% endif
+-->
+
+<p>You can reply to this email if you have any questions.</p>
+<p>Thank you,</p>
+
+<p style="color:#888888;">
+% if user and user.signature:
+    ${user.signature | safe}
+% endif
+</p>
+]]>
+            </field>
+        </record>
+    </data>
+</odoo>

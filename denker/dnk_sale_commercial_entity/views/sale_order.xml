@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="dnk_sale_commercial_entity_graph_view_1" model="ir.ui.view">
+            <field name="name">dnk_sale_commercial_entity_graph_view_1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="dnk_commercial_partner_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="dnk_sale_commercial_entity_search_view_1" model="ir.ui.view">
+            <field name="name">dnk_sale_commercial_entity_search_view_1</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="dnk_commercial_partner_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="dnk_sale_commercial_entity_search_view_2" model="ir.ui.view">
+            <field name="name">dnk_sale_commercial_entity_search_view_2</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="dnk_commercial_partner_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="dnk_sale_commercial_entity_search_view_3" model="ir.ui.view">
+            <field name="name">dnk_sale_commercial_entity_search_view_3</field>
+            <field name="model">sale.report</field>
+            <field name="inherit_id" ref="sale.view_order_product_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="commercial_partner_id" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

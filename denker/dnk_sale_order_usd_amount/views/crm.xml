@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="dnk_sale_action_orders_from_usd_amount" model="ir.actions.act_window">
+        <field name="name">Sale orders</field>
+        <field name="res_model">sale.order</field>
+        <field name="domain">[('opportunity_id', '=', active_id), ('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+        <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field>
+    </record>
+
+    <record id="dnk_crm_case_form_view_oppor_2" model="ir.ui.view">
+        <field name="name">dnk_crm_case_form_view_oppor_2</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="before">
+                <button class="oe_stat_button" type="action" attrs="{'invisible': [('dnk_sale_amount_total_usd', '=', 0)]}"
+                        name="%(dnk_sale_action_orders_from_usd_amount)d" icon="fa-usd"
+                        context="{'search_default_partner_id': partner_id, 'default_partner_id': partner_id, 'search_default_sales': 1}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="dnk_sale_amount_total_usd" widget="monetary"/> USD</span>
+                            <span class="o_stat_text"> Orders</span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+
+    <!-- Mejor voy  a ocultar el botón manualmente -->
+    <!--
+    <record id="dnk_sale_crm_case_form_view_oppor_1" model="ir.ui.view">
+        <field name="name">dnk_sale_crm_case_form_view_oppor_1</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <button name="495" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </button>
+        </field>
+    </record>-->
+</odoo>

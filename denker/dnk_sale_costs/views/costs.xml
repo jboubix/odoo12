@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Customisations-->
+  <record id="dnk_product_costs_tree_view_1" model="ir.ui.view">
+       <field name="name">dnk_product_costs_tree_view_1</field>
+       <field name="model">dnk.product.costs</field>
+       <field name="arch" type="xml">
+           <tree string="- Histórico de Costos">
+               <field name="dnk_name" />
+               <field name="dnk_cost_mp" />
+               <field name="dnk_cost_mo" />
+               <field name="dnk_cost_gif" />
+           </tree>
+       </field>
+   </record>
+
+  <record model="ir.actions.act_window" id="dnk_product_cost_action">
+      <field name="name">- Histórico de Costos DP</field>
+      <field name="res_model">dnk.product.costs</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+  </record>
+
+  <menuitem action="dnk_product_cost_action" id="dnk_product_cost_menu"
+      parent="sale.sale_menu_root" groups="dnk_product_hide_cost.dnk_show_cost_price" sequence="73" />
+</odoo>

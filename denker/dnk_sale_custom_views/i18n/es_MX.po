@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_sale_custom_views
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20181226\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-22 22:55+0000\n"
+"PO-Revision-Date: 2019-02-22 22:55+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_sale_custom_views
+#: model:res.groups,name:dnk_sale_custom_views.dnk_group_product_purchase_page
+msgid "- Purchase Page in Product"
+msgstr "- Página de Compras en Producto"
+
+#. module: dnk_sale_custom_views
+#: model:res.groups,name:dnk_sale_custom_views.dnk_group_sale_order_create
+msgid "Sale Order Create"
+msgstr "Crear Pedido"
+
+#. module: dnk_sale_custom_views
+#: model:ir.ui.view,arch_db:dnk_sale_custom_views.dnk_view_sale_quotation_hide_create_form
+msgid "Send by Email"
+msgstr "Enviar por correo electrónico"
+
+#. module: dnk_sale_custom_views
+#: model:res.groups,comment:dnk_sale_custom_views.dnk_group_sale_order_create
+msgid "This group can create sale quotations and order from its form or view forms"
+msgstr "Este grupo puede crear cotizaciones de venta y pedido desde su formulario."
+
+#. module: dnk_sale_custom_views
+#: model:res.groups,comment:dnk_sale_custom_views.dnk_group_product_purchase_page
+msgid "This group can view the purchase page on Product form view"
+msgstr "Este grupo puede ver la página de compras en el formulario de Producto."
+
+#. module: dnk_sale_custom_views
+#: model:ir.module.category,description:dnk_sale_custom_views.denker_sale_module_category
+msgid "User Groups created by Grupo Denker modules"
+msgstr "Grupos de Usuario creado por los módulos de Grupo"

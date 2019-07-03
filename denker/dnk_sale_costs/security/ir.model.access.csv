@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+dnk_sale_costs_all, Denker Costs Admin Write,model_dnk_product_costs,dnk_product_hide_cost.dnk_show_cost_price,1,0,1,1
+dnk_sale_costs_rea, Denker Costs Read Write,model_dnk_product_costs,base.group_user,1,0,0,0
+dnk_mrp_bom_cost Write, Denker BOM Cost Admin Write,model_dnk_mrp_bom,dnk_product_hide_cost.dnk_show_cost_price,1,0,1,1

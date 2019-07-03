@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+dnk_product_customer_code_admin_access, Denker Customer Product Code Admin Access,model_dnk_customer_product_code,dnk_product_customer_code.dnk_product_customer_code_admin,1,1,1,1
+dnk_product_customer_code_user_access, Denker Customer Product Code User Access,model_dnk_customer_product_code,account.group_account_user,1,0,1,0

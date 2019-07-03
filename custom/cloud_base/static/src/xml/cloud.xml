@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+    <t t-extend="Sidebar">
+        <t t-jquery="li.o_sidebar_add_attachment" t-operation="after">
+            <li t-if="section.name == 'files' and widget.options.editable" class="o_sidebar_add_attachment">
+              <a style="padding:3px 25px;"
+                 t-att-data-id="widget.env.activeIds[0]"
+                 t-att-data-model="widget.env and widget.env.model"
+                 name="cloud_client"
+              >
+                <span>Open folder...</span>
+              </a>
+            </li>
+        </t>
+    </t>
+</template>

@@ -1,0 +1,27 @@
+<odoo>
+
+        <record id="dnk_mrp_sale_order_line_link" model="res.groups">
+            <field name="name">MRP - Sale Order Line Link</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can relate a MO with a Sale Order Line.</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_mrp_sale_purchase_link_category"/>
+        </record>
+
+        <record id="dnk_purchase_sale_order_lines_link" model="res.groups">
+            <field name="name">Purchase - Sale Order Lines Link</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can relate a PO with Sale Order Lines.</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_mrp_sale_purchase_link_category"/>
+        </record>
+
+        <record id="dnk_sale_order_line_mrp_purchase_links" model="res.groups">
+            <field name="name">Sale Order Line - MRP - Purchase Links</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can relate a Sale Order Line with a MO and a PO.</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_mrp_sale_purchase_link_category"/>
+        </record>
+
+</odoo>

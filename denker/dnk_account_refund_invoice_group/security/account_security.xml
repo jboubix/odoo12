@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dnk_group_account_refund_invoice" model="res.groups">
+            <field name="name">Refund Customer Invoices</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="comment">This group can refund Customer Invoices.</field>
+            <field name="category_id" ref="dnk_groups_categories.dnk_accounting_category"/>
+        </record>
+    </data>
+</odoo>

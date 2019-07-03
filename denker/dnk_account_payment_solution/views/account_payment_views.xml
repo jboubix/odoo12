@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="dnk_account_payment_bank_authorization_form_view" model="ir.ui.view">
+            <field name="name">dnk.account.payment.bank.authorization.form.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="communication" position="after">
+                    <field name="dnk_bank_authorization"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="dnk_account_supplier_payment_bank_authorization_tree_view" model="ir.ui.view">
+            <field name="name">dnk.account.supplier.payment.bank.authorization.tree.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+            <field name="arch" type="xml">
+        				<field name="state" position="after">
+        					<field name="dnk_bank_authorization"/>
+        				</field>
+            </field>
+        </record>
+
+        <record id="dnk_account_payment_bank_authorization_tree_view" model="ir.ui.view">
+            <field name="name">dnk.account.payment.bank.authorization.tree.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                  <field name="dnk_bank_authorization"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="dnk_account_payment_bank_authorization_search_view" model="ir.ui.view">
+            <field name="name">dnk.account.payment.bank.authorization.search.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                  <field name="dnk_bank_authorization"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="dnk_account_payment_from_invoices_bank_authorization_view" model="ir.ui.view">
+            <field name="name">dbk.account.payment.from.invoices.bank.authorization.view</field>
+            <field name="model">account.register.payments</field>
+            <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='communication']" position="after">
+                        <field name="dnk_bank_authorization"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="dnk_account_payment_form_bank_authorization_view" model="ir.ui.view">
+            <field name="name">dnk.account.payment.form.bank.authorization.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='communication']" position="after">
+                        <field name="dnk_bank_authorization"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

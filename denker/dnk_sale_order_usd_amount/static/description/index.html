@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Denker - USD</h2>
+            <h4 class="oe_slogan">Grupo Denker, www.grupodenker.com</h4>
+        </div>
+        <div class="oe_row oe_spaced">
+        <ul>
+           <li style="list-style:none !important;">&nbsp;&nbsp;
+               Módulo para agregar campo calculado en Pedidos de venta y en Líneas de pedido  el total en USD.
+           </li>
+        </ul>
+        </div>
+        <div class="oe_span12">
+            <p class="oe_mt32">
+                <p>Éste módulo agrega los siguientes campos: <br/>
+                    <b>Sale Order:</b> <br/>
+                        - [dnk_amount_untaxed_usd] - Untaxed Amount USD <br/>
+                    <b>Sale Order Line:</b> <br/>
+                        - [dnk_price_subtotal_usd] - Subtotal USD <br/>
+                    <b>Sales Analysis:</b> <br/>
+                        - [dnk_price_subtotal_usd] = - Untaxed Total USD <br/>
+                        - [dnk_family] - Family <br/>
+                        - [dnk_color] - Color <br/>
+                </p>
+                <br/>
+                <br/>
+                    <b> [sale_crm.crm_case_form_view_oppor] Vista </b>
+                        Decidí mejor ocultar manualmente el botón de Orders, con name = sale_amount_total
+                        para no ocultar con una vista en xml.<br/>
+                        Cambié los atributos de<br/>
+                            attrs="{'invisible': [('sale_amount_total', '=', 0)]}"<br/>
+                        a<br/>
+                            attrs="{'invisible': True}"<br/><br/>
+            </p>
+        </div>
+    </div>
+</section>

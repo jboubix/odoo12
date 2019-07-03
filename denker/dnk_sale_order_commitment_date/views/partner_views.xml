@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <record id="view_partner_recommitment_notification_form_view" model="ir.ui.view">
+        <field name="name">view.partner.recommitment.notification.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">250</field>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="dnk_recommitment_notification"/>
+            </field>
+        </field>
+    </record>
+  </data>
+</odoo>

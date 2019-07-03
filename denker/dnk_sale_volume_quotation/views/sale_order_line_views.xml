@@ -1,0 +1,20 @@
+<odoo>
+  <data>
+    <record id="dnk_view_sale_order_volume_quotation_form" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.volume.quotation.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form/group/group[2]/div[2]" position="after">
+                <field name="dnk_minimum_quantity" readonly="1" style="text-align:right;" class="oe_right"/>
+                <field name="dnk_volume_prices" readonly="1" style="text-align:right;" class="oe_right"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="dnk_minimum_quantity" readonly="1" style="text-align:right;"/>
+                <field name="dnk_volume_prices" readonly="1" style="text-align:right;"/>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

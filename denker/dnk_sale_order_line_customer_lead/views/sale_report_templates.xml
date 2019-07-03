@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Esconder el el recuadro "Invoicing and shipping address:" -->
+    <template id="report_saleorder_document_product_delivery_date" inherit_id="sale.report_saleorder_document">
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/thead/tr/th" position="after">
+              <th t-if="doc.state in ('draft', 'sent')" class="text-right">Delivery Days</th>
+          </xpath>
+
+          <xpath expr="//t[@t-foreach='doc.order_lines_layouted()']/table/tbody/t[1]/t[2]/tr/td[1]" position="after">
+              <td t-if="doc.state in ('draft', 'sent')" class="text-right"><span t-field="l.dnk_customer_lead"/></td>
+          </xpath>
+    </template>
+</odoo>

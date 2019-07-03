@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Solución de cobro en vista Form  de factura de clientes. -->
+    <data>
+        <record id="dnk_payment_solution_form_view_1" model="ir.ui.view">
+            <field name="name">dnk_payment_solution_form_1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='cash_rounding_id']" position="after">
+                    <field name="dnk_payment_solution" widget="many2many_tags"
+                        options="{'no_create_edit': True, 'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+    <!-- Solución de cobro en vista Tree de facturas de clientes. -->
+    <data>
+        <record id="dnk_account_payment_solution_tree_view_1" model="ir.ui.view">
+            <field name="name">dnk_account_payment_solution_tree_view_1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+				<field name="number" position="after">
+					<field name="dnk_payment_solution" widget="many2many_tags"/>
+				</field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_sale_order_line_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-19 21:06+0000\n"
+"PO-Revision-Date: 2018-10-19 21:06+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.actions.act_window,help:dnk_sale_order_line_menu.action_sale_order_line
+msgid "Create a Quotation, the first step of a new sale."
+msgstr "Crea un Presupuesto, el primer paso de una nueva venta."
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_form
+msgid "Delivered Quantity"
+msgstr "Cantidad Entregada"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_form
+msgid "Invoiced Quantity"
+msgstr "Cantidad Facturada"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.actions.act_window,help:dnk_sale_order_line_menu.action_sale_order_line
+msgid "Once the quotation is confirmed, it becomes a Sport league.\n"
+"                You'll be able to invoice it and collect payments.\n"
+"                From the <i>Quotation</i> menu, you can track delivery\n"
+"                orders or services."
+msgstr "Once the quotation is confirmed, it becomes a Sport league.\n"
+"                You'll be able to invoice it and collect payments.\n"
+"                From the <i>Quotation</i> menu, you can track delivery\n"
+"                orders or services."
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_form
+msgid "Ordered Quantity"
+msgstr "Cantidad pedida"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_filter
+msgid "Product"
+msgstr "Producto"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.actions.act_window,name:dnk_sale_order_line_menu.action_sale_order_line
+#: model:ir.ui.menu,name:dnk_sale_order_line_menu.menu_sale_order_line
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_filter
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_form
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_tree
+msgid "Sale Orders Lines"
+msgstr "Líneas de Pedidos de Venta"
+
+#. module: dnk_sale_order_line_menu
+#: model:ir.ui.view,arch_db:dnk_sale_order_line_menu.dnk_view_sale_order_line_form
+msgid "days"
+msgstr "días"

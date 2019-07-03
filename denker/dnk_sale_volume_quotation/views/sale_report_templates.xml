@@ -1,0 +1,238 @@
+<odoo>
+    <!-- sudo nano /opt/odoo10dev/odoo/addons/sale/report/sale_report_templates.xml -->
+    <template id="dnk_report_saleorder_document_volume_quotation" inherit_id="sale.report_saleorder_document">
+
+        <!-- Esconder el el recuadro "Invoicing and shipping address:" -->
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+              <style type="text/css">
+                  table {
+                      font-size: 8px;
+                  }
+              </style>
+              <div class="oe_structure"/>
+              <br/>
+              <div class="row" style="font-size: 10px;">
+                  <div class="col-xs-3">
+                      <strong style="font-size: 10px;">Attention: </strong><div style="text-transform: capitalize" t-field="doc.partner_id.name"/>
+                  </div>
+                  <div class="col-xs-3">
+                      <strong style="font-size: 10px;">Customer: </strong>
+                      <div t-if="doc.partner_id.parent_id" t-field="doc.partner_id.parent_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                      <div t-if="not doc.partner_id.parent_id" t-field="doc.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' />
+                  </div>
+                  <div class="col-xs-3">
+                      <strong>Your Reference:</strong>
+                      <p t-field="doc.client_order_ref"/>
+                  </div>
+                  <div class="col-xs-3 pull-right">
+                    <div>
+                      <span t-if="doc.state not in ['draft','sent']"><strong style="font-size: 10px;">Order # </strong></span>
+                      <span t-if="doc.state in ['draft','sent']"><strong style="font-size: 10px;">Quotation # </strong></span>
+                      <div t-if="doc.state not in ['draft','sent']" style="font-size: 14px;font-weight:bold;color:#ff0000;" t-field="doc.name"/>
+                      <div t-if="doc.state in ['draft','sent']" style="font-size: 14px;font-weight:bold;color:#0000ff;" t-field="doc.name"/>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row mt16 mb16" id="informations" style="font-size: 10px;">
+                  <div t-if="doc.date_order" class="col-xs-3">
+                      <strong t-if="doc.state not in ['draft','sent']">Date Ordered:</strong>
+                      <strong t-if="doc.state in ['draft','sent']">Quotation Date:</strong>
+                      <p t-field="doc.date_order"/>
+                  </div>
+                  <div t-if="doc.user_id.name" class="col-xs-3">
+                      <strong>Salesperson:</strong>
+                      <p>
+                        <span t-field="doc.user_id"/>
+                        <span t-field="doc.user_id.partner_id.email"/>
+                      </p>
+                  </div>
+                  <div t-if="doc.dnk_customer_service_rep_id.name" class="col-xs-3">
+                      <strong>Customer Service Rep:</strong>
+                      <p>
+                        <span t-field="doc.dnk_customer_service_rep_id"/>
+                        <span t-field="doc.dnk_customer_service_rep_id.partner_id.email"/>
+                      </p>
+                  </div>
+                  <div name="payment_term" t-if="doc.payment_term_id" class="col-xs-3">
+                      <strong>Payment Terms:</strong>
+                      <p t-field="doc.payment_term_id"/>
+                  </div>
+              </div>
+
+              <t t-set="primary_color" t-value="'background-color:#444444;text-transform: uppercase;color:#ffffff;'"/>
+              <t t-set="secundary_color" t-value="'background-color:#444444;text-transform: uppercase;color:#ffffff;'"/>
+              <t t-if="doc.user_id.company_id.name=='ANTIESTATICA DE MEXICO SA DE CV' ">
+                  <t t-set="primary_color" t-value="'background-color:#00467f;text-transform: uppercase;color:#ffffff;'"/>
+                  <t t-set="secundary_color" t-value="'background-color:#387c2b;text-transform: uppercase;color:#ffffff;'"/>
+              </t>
+              <t t-if="doc.user_id.company_id.name=='EMPAQUES MPK SAPI DE CV' ">
+                  <t t-set="primary_color" t-value="'background-color:#c81f3f;text-transform: uppercase;color:#ffffff;'"/>
+                  <t t-set="secundary_color" t-value="'background-color:#8b8c8e;text-transform: uppercase;color:#ffffff;'"/>
+              </t>
+              <t t-if="doc.user_id.company_id.name=='EMPAQUES FLEXINNOVA SA DE CV' ">
+                  <t t-set="primary_color" t-value="'background-color:#123d6f;text-transform: uppercase;color:#ffffff;'"/>
+                  <t t-set="secundary_color" t-value="'background-color:#ffc82c;text-transform: uppercase;color:#555555;'"/>
+              </t>
+              <t t-if="doc.user_id.company_id.name=='TECNOLOGIA EN GOMA SAPI DE CV' ">
+                  <t t-set="primary_color" t-value="'background-color:#ffd204;text-transform: uppercase;color:#555555;'"/>
+                  <t t-set="secundary_color" t-value="'background-color:#ef4035;text-transform: uppercase;color:#ffffff;'"/>
+              </t>
+
+              <!-- Is there a discount on at least one line? -->
+              <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+
+              <t t-foreach="doc.order_lines_layouted()" t-as="page">
+                  <table class="table table-condensed" style="border: 1px solid #555555;">
+                      <thead>
+                          <tr t-att-style="primary_color">
+                              <th t-att-style="primary_color">Line</th>
+                              <th t-att-style="primary_color">Code</th>
+                              <th t-att-style="primary_color">Product</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']" class="text-right">Quantity</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']" class="text-right">Unit Price</th>
+                              <th t-att-style="primary_color" t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Disc.(%)</th>
+                              <th t-att-style="primary_color" t-if="doc.state in ['draft','sent']">UoM</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']">Delivery Date</th>
+                              <th t-att-style="primary_color" t-if="doc.state in ['draft','sent']">Lead Time (days)</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']" class="text-right">Taxes</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']" class="text-right" groups="sale.group_show_price_subtotal">Price</th>
+                              <th t-att-style="primary_color" t-if="doc.state not in ['draft','sent']" class="text-right price_tax_included" groups="sale.group_show_price_total">Total Price</th>
+                              <th t-att-style="primary_color" t-if="doc.state in ['draft','sent']">Qty.</th>
+                              <th t-att-style="primary_color" t-if="doc.state in ['draft','sent']" colspan="2">Unit Price</th>
+                              <th t-att-style="primary_color" t-if="doc.state in ['draft','sent']">Image</th>
+                          </tr>
+                     </thead>
+                     <tbody class="sale_tbody">
+                          <t t-foreach="page" t-as="layout_category">
+
+                              <t t-if="layout_category_size > 1 or page_size > 1" groups="sale.group_sale_layout">
+                                  <tr class="active">
+                                      <td colspan="7" style="font-weight: bold; border-bottom: 1px solid #555555;">&amp;bull;
+                                          <t t-esc="layout_category['name']"/>
+                                      </td>
+                                  </tr>
+                              </t>
+
+                              <!-- Lines associated -->
+                              <t t-foreach="layout_category['lines']" t-as="l">
+                                  <tr style="background-color:transparent;">
+                                      <td class="text-right"><span t-esc="l_index + 1"/></td>
+                                      <!--<td><span t-field="l.customer_code"/></td>-->
+                                      <td><span t-if="l.dnk_customer_product_code" t-field="l.dnk_customer_product_code"/><span t-if="not l.dnk_customer_product_code" t-field="l.product_id.default_code"/></td>
+                                      <td><span t-field="l.name"/></td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right">
+                                          <span t-field="l.product_uom_qty"/>
+                                          <span t-field="l.product_uom" groups="product.group_uom"/>
+                                      </td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right">
+                                          <span t-field="l.price_unit"/>
+                                      </td>
+                                      <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                                          <span t-field="l.discount"/>
+                                      </td>
+                                      <td t-if="doc.state in ['draft','sent']" class="text-right">
+                                          <span t-field="l.product_uom" groups="product.group_uom"/>
+                                      </td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right"><span t-field="l.dnk_commitment_date" t-options="{'widget': 'date'}"/></td>
+                                      <td t-if="doc.state in ['draft','sent']" class="text-right"><span t-field="l.customer_lead"/></td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right">
+                                          <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.tax_id))"/>
+                                      </td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right" groups="sale.group_show_price_subtotal">
+                                          <span t-field="l.price_subtotal"
+                                              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                      </td>
+                                      <td t-if="doc.state not in ['draft','sent']" class="text-right" groups="sale.group_show_price_total">
+                                          <span t-field="l.price_total"
+                                              t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                      </td>
+                                      <td t-if="doc.state in ['draft','sent'] and l.dnk_minimum_quantity" class="text-right"><span t-field="l.dnk_minimum_quantity"/></td>
+                                      <td t-if="doc.state in ['draft','sent'] and not l.dnk_minimum_quantity" class="text-right"><span t-field="l.product_uom_qty"/></td>
+                                      <td t-if="doc.state in ['draft','sent'] and l.dnk_volume_prices" class="text-right"><span t-field="l.dnk_volume_prices"/></td>
+                                      <td t-if="doc.state in ['draft','sent'] and not l.dnk_volume_prices" class="text-right"><span t-field="l.price_unit"/></td>
+                                      <td t-if="doc.state in ['draft','sent']" class="text-right"><span t-field="doc.pricelist_id.currency_id"/></td>
+                                      <td t-if="doc.state in ['draft','sent']" style="width:15% !important;">
+                                          <span t-field="l.product_id.image_medium"
+                                                t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img-rounded&quot;}"/>
+                                      </td>
+                                  </tr>
+                              </t>
+
+                              <t t-if="(layout_category_size > 1 or page_size > 1) and layout_category['subtotal']" groups="sale.group_sale_layout">
+                                  <tr class="text-right">
+                                      <td colspan="6">
+                                          <strong>Subtotal: </strong>
+                                          <t t-set="subtotal" t-value="sum(line.price_subtotal for line in layout_category['lines'])"/>
+                                          <span t-esc="subtotal" t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}"/>
+                                      </td>
+                                  </tr>
+                              </t>
+                          </t>
+                      </tbody>
+                  </table>
+
+                  <t t-if="page_index &lt; page_size - 1" groups="sale.group_sale_layout">
+                      <p style="page-break-before:always;"> </p>
+                  </t>
+              </t>
+
+              <div t-if="doc.state not in ['draft','sent']" class="row" name="total">
+                  <div class="col-xs-4 pull-right">
+                      <table class="table table-condensed">
+                          <tr class="border-black">
+                              <td><strong>Total Without Taxes</strong></td>
+                              <td class="text-right">
+                                  <span t-field="doc.amount_untaxed"
+                                      t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                              </td>
+                          </tr>
+                          <t t-foreach="doc._get_tax_amount_by_group()" t-as="amount_by_group">
+                              <tr>
+                                  <td><span t-esc="amount_by_group[0] or 'Taxes'"/></td>
+                                  <td class="text-right">
+                                      <span t-esc="amount_by_group[1]"
+                                          t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                                  </td>
+                              </tr>
+                          </t>
+                          <tr class="border-black">
+                              <td><strong>Total</strong></td>
+                              <td class="text-right">
+                                  <span t-field="doc.amount_total"
+                                      t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+
+              <p t-if="doc.note">
+                  <table class="table table-condensed" style="border: 1px solid #555555;">
+                      <thead>
+                          <tr t-att-style="secundary_color">
+                              <th t-att-style="secundary_color">Terms and Conditions:</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr style="background-color:transparent;">
+                              <td>
+                                <span t-field="doc.note"/>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </p>
+              <!--<p t-if="doc.payment_term_id.note">
+                  <span t-field="doc.payment_term_id.note"/>
+              </p>-->
+              <p id="fiscal_position_remark" t-if="doc.fiscal_position_id and doc.fiscal_position_id.note">
+                  <strong>Fiscal Position Remark:</strong>
+                  <span t-field="doc.fiscal_position_id.note"/>
+              </p>
+              <div class="oe_structure"/>
+          </div>
+        </xpath>
+    </template>
+</odoo>

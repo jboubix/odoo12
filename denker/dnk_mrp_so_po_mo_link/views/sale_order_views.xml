@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Comentar porque no es necesario ver estos campos en el formulario de Sale Order
+    <record model="ir.ui.view" id="dnk_sale_order_mrp_production_form_view">
+        <field name="name">dnk.sale.order.mrp.production.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="dnk_sale_order_dates.dnk_view_order_form_inherit_sale_stock_inherit_sale_order_dates"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                <field name="dnk_mrp_production_id"/>
+                <field name="dnk_mrp_production_state"/>
+                <field name="dnk_purchase_order_id"/>
+                <field name="dnk_purchase_order_state"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="dnk_mrp_production_id"/>
+                <field name="dnk_mrp_production_state"/>
+                <field name="dnk_purchase_order_id"/>
+                <field name="dnk_purchase_order_state"/>
+            </xpath>
+        </field>
+    </record>-->
+
+    <record id="dnk_sale_order_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.mrp.production.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="dnk_mrp_production_id"/>
+                <field name="dnk_mrp_production_state"/>
+                <field name="dnk_mrp_production_date_planned_start"/>
+                <!--<field name="dnk_purchase_order_id"/>
+                <field name="dnk_purchase_order_state"/>-->
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_line_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.mrp.production.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="dnk_family_id" position="after">
+                <!--<field name="dnk_recommitment_date"/>-->
+                <field name="dnk_mrp_production_id"/>
+                <field name="dnk_mrp_production_state"/>
+                <field name="dnk_mrp_production_date_planned_start"/>
+                <!--<field name="dnk_purchase_order_id"/>
+                <field name="dnk_purchase_order_state"/>-->
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_line_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.mrp.production.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_form" />
+        <field name="arch" type="xml">
+              <field name="price_unit" position="after">
+                <field name="dnk_commitment_date" readonly="1"/>
+                <field name="dnk_recommitment_date" readonly="1"/>
+              </field>
+              <xpath expr="//form/sheet/group/group[2]" position="after">
+                  <group string="MRP Information" name="mrp_information">
+                      <field name="dnk_mrp_production_id" readonly="1"/>
+                      <field name="dnk_mrp_production_state" readonly="1"/>
+                      <field name="dnk_mrp_production_date_planned_start" readonly="1"/>
+                      <!--<field name="dnk_purchase_order_id" readonly="1"/>
+                      <field name="dnk_purchase_order_state" readonly="1"/>-->
+                  </group>
+              </xpath>
+        </field>
+    </record>
+
+    <!--<record id="dnk_sale_order_line_edit_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.edit.mrp.production.form.view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_mrp_production_form_view"/>
+        <field name="groups_id" eval="[(4, ref('dnk_mrp_so_po_mo_link.dnk_sale_order_line_mrp_purchase_links'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dnk_mrp_production_id']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dnk_purchase_order_id']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+        </field>
+    </record>-->
+
+    <record id="dnk_view_sales_order_line_production_filter" model="ir.ui.view">
+      <field name="name">dnk.view.sales.order.line.production.select</field>
+      <field name="model">sale.order.line</field>
+      <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_filter"/>
+      <field name="arch" type="xml">
+          <filter name="my_sale_orders_filter" position="after">
+              <filter string="Without Manufacturing Order" domain="[('dnk_mrp_production_id','=',False)]" help="Sales Order Lines without a Manufacturing Order linked"/>
+              <field name="dnk_mrp_production_id"/>
+              <!--<filter string="Without Purchase Order" domain="[('dnk_purchase_order_id','=',False)]" help="Sales Order Lines without a Purchase Order linked"/>
+              <field name="dnk_purchase_order_id"/>-->
+          </filter>
+      </field>
+    </record>
+
+</odoo>

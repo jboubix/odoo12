@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="dnk_account_payment_difference_form_view_1" model="ir.ui.view">
+            <field name="name">adnk_account_payment_difference_form_view_1</field>
+            <field name="model">account.register.payments</field>
+            <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group/group[2]" position="after">
+                    <group attrs="{'invisible': ['|',('dnk_payment_difference', '=', 0.0),('multi','=',True)]}">
+                        <label for="dnk_payment_difference"/>
+                        <div>
+                            <field name="dnk_payment_difference"/>
+                            <field name="dnk_payment_difference_handling" widget="radio" nolabel="1"/>
+                        </div>
+                        <field name="dnk_writeoff_account_id"
+                            attrs="{'invisible': [('dnk_payment_difference_handling','=','open')], 'required': [('dnk_payment_difference_handling', '=', 'reconcile')]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+</odoo>

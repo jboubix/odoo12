@@ -1,0 +1,9 @@
+<odoo>
+    <template id="dnk_report_invoice_external_trade_label" inherit_id="account.report_invoice_document">
+        <xpath expr="//*[@id='total']" position="before">
+            <div class="col-xs-6" t-if="o.dnk_customer_exp_info">
+                <p t-field="o.dnk_customer_exp_info"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

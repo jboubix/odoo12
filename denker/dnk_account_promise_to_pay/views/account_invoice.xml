@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Promesa de pago en vista Form de factura de clientes. -->
+    <data>
+        <record id="dnk_invoice_promise_to_pay_form_view_1" model="ir.ui.view">
+            <field name="name">dnk_invoice_promise_to_pay_form_view_1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="dnk_promise_to_pay" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

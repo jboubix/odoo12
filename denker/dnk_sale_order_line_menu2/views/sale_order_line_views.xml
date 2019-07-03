@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dnk_view_sale_order_line_form2" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.form2</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_form"/>
+        <field name="arch" type="xml">
+            <field name="tax_id" position="before">
+                <field name="dnk_order_confirmation_date"/>
+                <field name="dnk_order_tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_view_sale_order_line_tree2" model="ir.ui.view">
+        <field name="name">dnk.view.sale.order.line.tree2</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_tree"/>
+        <field name="arch" type="xml">
+          <field name="dnk_family_id" position="before">
+              <field name="dnk_order_confirmation_date"/>
+          </field>
+        </field>
+    </record>
+</odoo>

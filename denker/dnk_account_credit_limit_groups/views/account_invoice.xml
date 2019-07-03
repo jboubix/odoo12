@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_account_mx_edi_invoice_form_1" model="ir.ui.view">
+        <field name="name">dnk_account_mx_edi_invoice_form_1</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="l10n_mx_edi.view_l10n_mx_edi_invoice_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='l10n_mx_edi_payment_method_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='l10n_mx_edi_usage']" position="attributes">
+              <attribute name="readonly">1</attribute>
+            </xpath>
+            <field name="invoice_line_tax_ids" position="attributes">
+              <attribute name="readonly">1</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="dnk_account_mx_edi_invoice_group_form_1" model="ir.ui.view">
+          <field name="name">dnk_account_mx_edi_invoice_group_form_1</field>
+          <field name="model">account.invoice</field>
+          <field name="inherit_id" ref="dnk_account_mx_edi_invoice_form_1"/>
+          <field name="groups_id" eval="[(4, ref('dnk_account_credit_limit_groups.dnk_account_credit_limit_group'))]"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='l10n_mx_edi_payment_method_id']" position="attributes">
+                  <attribute name="readonly">0</attribute>
+              </xpath>
+              <xpath expr="//field[@name='l10n_mx_edi_usage']" position="attributes">
+                  <attribute name="attrs">{'readonly':[('l10n_mx_edi_pac_status', '=', 'signed')]}</attribute>
+              </xpath>
+              <field name="invoice_line_tax_ids" position="attributes">
+                <attribute name="readonly">0</attribute>
+              </field>
+          </field>
+      </record>
+</odoo>

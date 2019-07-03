@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="dnk_sale_order_mrp_production_form_view">
+        <field name="name">dnk.sale.order.mrp.production.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="dnk_sale_order_dates.dnk_view_order_form_inherit_sale_stock_inherit_sale_order_dates"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                <field name="mrp_production_id"/>
+                <field name="mrp_production_state"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="mrp_production_id"/>
+                <field name="mrp_production_state"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.mrp.production.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="mrp_production_id"/>
+                <field name="mrp_production_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_line_mrp_production_tree_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.mrp.production.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_tree" />
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="requested_date"/>
+                <field name="mrp_production_id"/>
+                <field name="mrp_production_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_sale_order_line_mrp_production_form_view" model="ir.ui.view">
+        <field name="name">dnk.sale.order.line.mrp.production.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="dnk_sale_order_line_menu.dnk_view_sale_order_line_form" />
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="requested_date"/>
+                <field name="mrp_production_id"/>
+                <field name="mrp_production_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="dnk_view_sales_order_line_production_filter" model="ir.ui.view">
+      <field name="name">dnk.view.sales.order.line.production.select</field>
+      <field name="model">sale.order.line</field>
+      <field name="inherit_id" ref="sale.view_sales_order_line_filter" />
+      <field name="arch" type="xml">
+          <field name="salesman_id" position="after">
+              <filter string="Without Manufacturing Order" domain="[('mrp_production_id','=',False)]" help="Sales Order Lines without a Manufacturing Order linked"/>
+              <field name="mrp_production_id"/>
+          </field>
+      </field>
+    </record>
+
+</odoo>

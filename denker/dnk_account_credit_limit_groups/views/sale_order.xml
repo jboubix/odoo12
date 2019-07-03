@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dnk_sale_credit_limit_group_1" model="ir.ui.view">
+        <field name="name">dnk_sale_credit_limit_group_1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="credit_limit_alert.credit_limit_alert_view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="permitted_credit_limit" position="before">
+                <field name="dnk_edit_accounting_fields" invisible="1"/>
+            </field>
+            <!-- Sale-->
+            <xpath expr="//field[@name='permitted_credit_limit']" position="attributes">
+                <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='paid_sale_order']" position="attributes">
+                <attribute name="attrs">{'readonly': [('dnk_edit_accounting_fields', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dnk_sale_credit_limit_list_view_1" model="ir.ui.view">
+        <field name="name">dnk_sale_credit_limit_list_view_1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="permitted_credit_limit" widget="boolean_toggle" groups="dnk_account_credit_limit_groups.dnk_account_credit_limit_group"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="dnk_stock_credit_limit_list_view_1" model="ir.ui.view">
+        <field name="name">dnk_stock_credit_limit_list_view_1</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="allow_delivery" widget="boolean_toggle" groups="dnk_account_credit_limit_groups.dnk_account_credit_limit_group"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="data_client_requirements_to_pay_1" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Completar Material</field>
+            <field name="dnk_sequence">1</field>
+        </record>
+        <record id="data_client_requirements_to_pay_2" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Revisión con Calidad - Denker</field>
+            <field name="dnk_sequence">2</field>
+        </record>
+        <record id="data_client_requirements_to_pay_3" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Falta Entrada del Requisitor</field>
+            <field name="dnk_sequence">3</field>
+        </record>
+        <record id="data_client_requirements_to_pay_4" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Programada Para Pago</field>
+            <field name="dnk_sequence">4</field>
+        </record>
+        <record id="data_client_requirements_to_pay_5" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Aceptada En Portal</field>
+            <field name="dnk_sequence">5</field>
+        </record>
+        <record id="data_client_requirements_to_pay_6" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Approved - Unpaid</field>
+            <field name="dnk_sequence">6</field>
+        </record>
+        <record id="data_client_requirements_to_pay_7" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">In Transit</field>
+            <field name="dnk_sequence">7</field>
+        </record>
+        <record id="data_client_requirements_to_pay_8" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Blocked - Unpaid</field>
+            <field name="dnk_sequence">8</field>
+        </record>
+        <record id="data_client_requirements_to_pay_9" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">On Hold</field>
+            <field name="dnk_sequence">9</field>
+        </record>
+        <record id="data_client_requirements_to_pay_10" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Factura Enviada</field>
+            <field name="dnk_sequence">10</field>
+        </record>
+        <record id="data_client_requirements_to_pay_11" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Otro - Otra</field>
+            <field name="dnk_sequence">11</field>
+        </record>
+        <record id="data_client_requirements_to_pay_12" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Packing Slip Discrepancy</field>
+            <field name="dnk_sequence">12</field>
+        </record>
+        <record id="data_client_requirements_to_pay_13" model="dnk.account.requirements.to.pay">
+            <field name="dnk_name">Price Discrepancy</field>
+            <field name="dnk_sequence">13</field>
+        </record>
+
+    </data>
+</odoo>

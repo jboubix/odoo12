@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modificar los campos en la SO, para que sólo se puedan seleccionar
+        contactos de la oportunindad con los respectivos tipos  -->
+    <record id="dnk_view_sale_order_partner_id_filter_form_view_1" model="ir.ui.view">
+        <field name="name">dnk_view_sale_order_partner_id_filter_form_view_1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="dnk_temp_partner_id" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="domain">[('parent_id','=',dnk_temp_partner_id),('type','=','contact')]</attribute>
+                <attribute name="options">{'no_create_edit': True, 'always_reload': True}</attribute>
+                <attribute name="context">{'show_address': 0,'default_type':'contact'}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                <attribute name="domain">[('parent_id','=',dnk_temp_partner_id),('type','=','invoice')]</attribute>
+                <attribute name="options">{'no_create_edit': True, 'always_reload': True}</attribute>
+                <attribute name="context">{'search_default_customer':1, 'show_address': 1,'default_type':'invoice'}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                <attribute name="domain">[('parent_id','=',dnk_temp_partner_id),('type','=','delivery')]</attribute>
+                <attribute name="options">{'no_create_edit': True, 'always_reload': True}</attribute>
+                <attribute name="context">{'search_default_customer':1, 'show_address': 1,'default_type':'delivery'}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

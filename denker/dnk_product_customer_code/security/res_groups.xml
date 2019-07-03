@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="dnk_product_customer_code_admin" model="res.groups">
+      <field name="name">Customer Product Code Admin</field>
+      <field name="comment">Agregar y Eliminar códigos del cliente</field>
+      <field name="category_id" ref="dnk_groups_categories.dnk_product_category"/>
+    </record>
+
+    <!--
+    <record id="dnk_product_customer_code_user" model="res.groups">
+      <field name="name">Customer Product Code User</field>
+      <field name="comment">Acceso de Lectura a los campos</field>
+      <field name="category_id" ref="dnk_groups_categories.dnk_product_category"/>
+  </record>-->
+  </data>
+</odoo>

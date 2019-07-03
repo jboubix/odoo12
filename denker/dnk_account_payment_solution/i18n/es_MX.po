@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_account_payment_solution
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20181226\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-22 17:26+0000\n"
+"PO-Revision-Date: 2019-02-22 17:26+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_account_payment_dnk_bank_authorization
+msgid "- Bank Authorization"
+msgstr "- Autorización de Banco"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_dnk_name
+msgid "- Name"
+msgstr "- Nombre"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_account_invoice_dnk_payment_solution
+msgid "- Payment Solution"
+msgstr "- Solución de Pago"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_dnk_sequence
+msgid "- Sequence"
+msgstr "- Secuencia"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,help:dnk_account_payment_solution.field_account_payment_dnk_bank_authorization
+msgid "Bank Authorization Code"
+msgstr "Código de Autorización de Banco"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_id
+msgid "ID"
+msgstr "ID"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model,name:dnk_account_payment_solution.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model.fields,field_description:dnk_account_payment_solution.field_dnk_account_payment_solution_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model,name:dnk_account_payment_solution.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: dnk_account_payment_solution
+#: model:ir.model,name:dnk_account_payment_solution.model_dnk_account_payment_solution
+msgid "dnk.account.payment.solution"
+msgstr "dnk.account.payment.solution"

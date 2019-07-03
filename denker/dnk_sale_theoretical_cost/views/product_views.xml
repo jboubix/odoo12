@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+      <record id="dnk_product_template_theoretical_cost_form" model="ir.ui.view">
+          <field name="name">dnk.product.template.theoretical.cost.form</field>
+          <field name="model">product.template</field>
+          <field name="inherit_id" ref="product.product_template_only_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//div[@name='standard_price_uom']" position="after">
+                  <label for="dnk_theoretical_cost" groups="base.group_user" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                  <div name="dnk_standard_price_uom" groups="base.group_user" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+                      <field name="dnk_theoretical_cost"/>
+                      <field name="dnk_theoretical_cost_currency_id"/>
+                  </div>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="dnk_product_template_theoretical_cost_tree" model="ir.ui.view">
+          <field name="name">dnk.product.template.theoretical.cost.tree</field>
+          <field name="model">product.template</field>
+          <field name="inherit_id" ref="product.product_template_tree_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='standard_price']" position="after">
+                  <field name="dnk_theoretical_cost" widget="monetary" options="{'currency_field': 'dnk_theoretical_cost_currency_id', 'field_digits': True}"/>
+                  <field name="dnk_theoretical_cost_currency_id" invisible="1"/>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="dnk_product_product_theoretical_cost_normal_form" model="ir.ui.view">
+          <field name="name">dnk.product.product.theoretical.cost.normal.form</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_normal_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='company_id']" position="before">
+                      <label for="dnk_theoretical_cost" groups="base.group_user" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                      <div name="dnk_standard_price_uom" groups="base.group_user" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+                          <field name="dnk_theoretical_cost" widget="monetary" options="{'currency_field': 'dnk_theoretical_cost_currency_id', 'field_digits': True}"/>
+                          <field class="oe_edit_only" name="dnk_theoretical_cost_currency_id"/>
+                      </div>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="dnk_product_product_theoretical_cost_easy_form" model="ir.ui.view">
+          <field name="name">dnk.product.product.theoretical.cost.easy.form</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='standard_price']" position="after">
+                  <group col="4">
+                      <field name="dnk_theoretical_cost"/>
+                      <field name="dnk_theoretical_cost_currency_id"/>
+                  </group>
+              </xpath>
+          </field>
+      </record>
+
+      <record id="dnk_product_product_theoretical_cost_tree" model="ir.ui.view">
+          <field name="name">dnk.product.product.theoretical.cost.tree</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="product.product_product_tree_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='price']" position="after">
+                  <field name="standard_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                  <field name="dnk_theoretical_cost" widget="monetary" options="{'currency_field': 'dnk_theoretical_cost_currency_id', 'field_digits': True}"/>
+                  <field name="dnk_theoretical_cost_currency_id" invisible="1"/>
+                  <field name="currency_id" invisible="1"/>
+              </xpath>
+          </field>
+      </record>
+  </data>
+
+</odoo>

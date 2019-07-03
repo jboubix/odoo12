@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dnk_sale_order_line_menu2
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20181226\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-22 00:09+0000\n"
+"PO-Revision-Date: 2019-01-22 00:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dnk_sale_order_line_menu2
+#: model:ir.model.fields,field_description:dnk_sale_order_line_menu2.field_sale_order_line_dnk_order_confirmation_date
+msgid "- Confirmation Date"
+msgstr "- Fecha de confirmación"
+
+#. module: dnk_sale_order_line_menu2
+#: model:ir.model.fields,help:dnk_sale_order_line_menu2.field_sale_order_line_dnk_order_confirmation_date
+msgid "Date on which the sales order is confirmed."
+msgstr "Fecha en que se confirma el pedido de venta."
+
+#. module: dnk_sale_order_line_menu2
+#: model:ir.model,name:dnk_sale_order_line_menu2.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de ventas"
+
+#. module: dnk_sale_order_line_menu2
+#: model:ir.model.fields,field_description:dnk_sale_order_line_menu2.field_sale_order_line_dnk_order_tag_ids
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: dnk_sale_order_line_menu2
+#: model:ir.model.fields,help:dnk_sale_order_line_menu2.field_sale_order_line_dnk_order_tag_ids
+msgid "Tags of the Sales Order."
+msgstr "Tags of the Sales Order."
